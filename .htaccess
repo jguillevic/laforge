@@ -1,4 +1,8 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+<<<<<<< HEAD
 RewriteRule ^(.*)$ /index.php
+=======
+RewriteRule ^(.*)$ /index.php
+>>>>>>> db147a44c31bad6262f925c9108e854984615da1
