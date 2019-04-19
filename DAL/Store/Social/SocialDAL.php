@@ -20,10 +20,12 @@ class SocialDAL
 			$this->db = new Database();
     }
 
-    public function LoadAll()
+    public function LoadByIds($ids)
     {
-        $query = "SELECT S.Id, S.FacebookLink, S.TwitterLink, S.YoutubeLink, S.InstagramLink FROM Social AS S;";
-
+        $query = "SELECT S.Id, S.FacebookLink, S.TwitterLink, S.YoutubeLink, S.InstagramLink FROM Social AS S WHERE ";
+        $params = array();
+        $query .= DALHelper::SetArrayParams($ids, "S", "Id", $params);
+        $query .= ";";
         $rows = $this->db->Read($query, $params);
 
         $socials = array();

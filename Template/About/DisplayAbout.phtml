@@ -1,10 +1,11 @@
 <?php
 use \Model\Day\Day;
+use \Model\Store\Store;
 use \Model\Store\Schedule\Schedule;
 use \Model\Store\Schedule\DaySchedule;
 use \Model\Store\Schedule\DayScheduleSection;
 
-$schedule = $params["schedule"];
+$store = $params["store"];
 ?>
 
 <section class="l-content content">
@@ -16,7 +17,7 @@ $schedule = $params["schedule"];
 			<section>
 				<h3><span><i class="far fa-calendar-alt"></i></span> Nos horaires</h3>
 				<table>
-<?php foreach ($schedule->GetDaySchedules() as $daySchedule) : ?>
+<?php foreach ($store->GetSchedule()->GetDaySchedules() as $daySchedule) : ?>
 					<tr>
 						<th><?= $daySchedule->GetDay()->GetLabel();?></th>
 						<th>:</th>

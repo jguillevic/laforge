@@ -22,11 +22,13 @@ class ScheduleDAL
 			$this->db = new Database();
 	}
 
-    public function LoadAll()
+    public function LoadByIds($ids)
     {
-        $query = "SELECT S.Id FROM Schedule AS S;";
-
-        $rows = $this->db->Read($query);
+        $query = "SELECT S.Id FROM Schedule AS S WHERE ";
+        $params = array();
+        $query .= DALHelper::SetArrayParams($ids, "S", "Id", $params);
+        $query .= ";";
+        $rows = $this->db->Read($query, $params);
 
         $schedules = array();
         $scheduleIds = array();

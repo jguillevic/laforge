@@ -58,20 +58,20 @@ CREATE TABLE ExtendedProperty
 
 CREATE TABLE Day
 (
-	Id INT NOT NULL
+	Id INT NOT NULL AUTO_INCREMENT
 	, Code NVARCHAR(10)
 	, PRIMARY KEY (Id)
 );
 
 CREATE TABLE Schedule
 (
-	Id INT NOT NULL
+	Id INT NOT NULL AUTO_INCREMENT
 	, PRIMARY KEY (Id)
 );
 
 CREATE TABLE DaySchedule
 (
-	Id INT NOT NULL
+	Id INT NOT NULL AUTO_INCREMENT
 	, ScheduleId INT NOT NULL
 	, DayId INT NOT NULL UNIQUE
 	, PRIMARY KEY (Id)
@@ -89,7 +89,6 @@ CREATE TABLE DayScheduleSection
 	, FOREIGN KEY (DayScheduleId) REFERENCES DaySchedule(Id)
 );
 
-
 CREATE TABLE Social
 (
 	Id INT NOT NULL AUTO_INCREMENT
@@ -97,8 +96,8 @@ CREATE TABLE Social
     , TwitterLink NVARCHAR(500) NULL
     , YoutubeLink NVARCHAR(500) NULL
     , InstagramLink NVARCHAR(500) NULL
-	, FOREIGN KEY (Id)
-)
+	, PRIMARY KEY (Id)
+);
 
 CREATE TABLE Contact
 (
@@ -107,7 +106,7 @@ CREATE TABLE Contact
     , Messenger NVARCHAR(500) NULL
     , PhoneNumber NVARCHAR(20) NULL
 	, PRIMARY KEY (Id)
-)
+);
 
 CREATE TABLE Address
 (
@@ -119,8 +118,21 @@ CREATE TABLE Address
 	, PostalCode INT NOT NULL
 	, City NVARCHAR(200) NOT NULL
 	, PRIMARY KEY (Id)
-)
+);
 
+CREATE TABLE Store
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, AddressId INT NOT NULL
+	, SocialId INT NOT NULL
+	, ContactId INT NOT NULL
+	, ScheduleId INT NOT NULL
+	, PRIMARY KEY (Id)
+	, FOREIGN KEY (AddressId) REFERENCES Address(Id)
+	, FOREIGN KEY (SocialId) REFERENCES Social(Id)
+	, FOREIGN KEY (ContactId) REFERENCES Contact(Id)
+	, FOREIGN KEY (ScheduleId) REFERENCES Schedule(Id)
+);
 
 
 INSERT INTO User (Username, Password)
@@ -150,23 +162,26 @@ VALUES (1, 1, 1)
 , (6, 1, 6)
 , (7, 1, 7);
 
-INSERT INTO DayScheduleSection (DayScheduleId, StartingTime, EndingTime)
-VALUES (2, '10:00', '12:00')
-, (2, '13:00', '19:00')
-, (3, '10:00', '12:00')
-, (3, '13:00', '19:00')
-, (4, '10:00', '12:00')
-, (4, '13:00', '19:00')
-, (5, '10:00', '12:00')
-, (5, '13:00', '19:00')
-, (6, '9:00', '12:00')
-, (6, '13:00', '19:00');
+INSERT INTO DayScheduleSection (Id, DayScheduleId, StartingTime, EndingTime)
+VALUES (1, 2, '10:00', '12:00')
+, (2, 2, '13:00', '19:00')
+, (3, 3, '10:00', '12:00')
+, (4, 3, '13:00', '19:00')
+, (5, 4, '10:00', '12:00')
+, (6, 4, '13:00', '19:00')
+, (7, 5, '10:00', '12:00')
+, (8, 5, '13:00', '19:00')
+, (9, 6, '9:00', '12:00')
+, (10, 6, '13:00', '19:00');
 
-INSERT INTO Social (FacebookLink, TwitterLink, YoutubeLink, InstagramLink)
-VALUES ('https://www.facebook.com/La-Forge-dAudren-164158920348705', 'https://twitter.com/LaForgedAudren', 'https://www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ', 'https://www.instagram.com/renaudlepage/');
+INSERT INTO Social (Id, FacebookLink, TwitterLink, YoutubeLink, InstagramLink)
+VALUES (1, 'https://www.facebook.com/La-Forge-dAudren-164158920348705', 'https://twitter.com/LaForgedAudren', 'https://www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ', 'https://www.instagram.com/renaudlepage/');
 
-INSERT INTO Contact (Email, Messenger, PhoneNumber)
-VALUES ('audren.forge@sfr.fr', 'https://m.me/164158920348705', '03.60.29.94.89');
+INSERT INTO Contact (Id, Email, Messenger, PhoneNumber)
+VALUES (1, 'audren.forge@sfr.fr', 'https://m.me/164158920348705', '03.60.29.94.89');
 
-INSERT INTO Address (SocialReason, Line1, PostalCode, City)
-VALUES ('La Forge d''Audren', '6 rue Vincent de Beauvais', 60000, 'BEAUVAIS');
+INSERT INTO Address (Id, SocialReason, Line1, PostalCode, City)
+VALUES (1, 'La Forge d''Audren', '6 rue Vincent de Beauvais', 60000, 'BEAUVAIS');
+
+INSERT INTO Store (Id, AddressId, ContactId, SocialId, ScheduleId)
+VALUES (1, 1, 1, 1, 1);

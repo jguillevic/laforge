@@ -20,10 +20,12 @@ class ContactDAL
 			$this->db = new Database();
     }
 
-    public function LoadAll()
+    public function LoadByIds($ids)
     {
-        $query = "SELECT C.Id, C.Email, C.Messenger, C.PhoneNumber FROM Contact AS C;";
-
+        $query = "SELECT C.Id, C.Email, C.Messenger, C.PhoneNumber FROM Contact AS C WHERE ";
+        $params = array();
+        $query .= DALHelper::SetArrayParams($ids, "C", "Id", $params);
+        $query .= ";";
         $rows = $this->db->Read($query, $params);
 
         $contacts = array();
