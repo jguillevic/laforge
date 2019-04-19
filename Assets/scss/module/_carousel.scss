@@ -1,0 +1,133 @@
+.carousel
+{
+	width: 100%;
+	height: $carousel-height;
+	position: relative;
+
+	& > ul
+	{
+		width: 100%;
+	}
+
+	&__item
+	{
+		display: none;
+		width: 100%;
+		background-color: $main-color;
+
+		&--current
+		{
+			display: inline-block;
+		}
+
+		&__image
+		{
+			//background-color: $main-color;
+		    object-fit: cover;
+		    overflow: hidden;
+		    width: 100%;
+		    height: $carousel-height;
+		    display: block;
+		    //opacity: 0.7;
+		}
+
+		&__info
+		{
+			position: absolute;
+			left: 6em;
+			bottom: 6em;
+			text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
+            width: 60%;
+            display: none;
+
+			&__title
+			{
+				color: $main-light;
+				font-size: 2.5em;
+				font-weight: 700;
+				font-family: $text-font;
+				margin-bottom: 0.3em;
+			}
+			
+			&__description
+			{
+				color: $main-light;
+				font-size: 1em;
+				font-weight: 400;
+				font-family: $text-font;
+			}
+		}
+	}
+
+	&__button
+	{
+		font-size: 4em;
+		color: $main-light;
+		position: absolute;
+		bottom: $carousel-height / 2 - 25px;
+		width: 50px;
+		transition: color 0.3s;
+		text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
+
+		&:hover
+		{
+			cursor: pointer;
+			color: $main-color;
+		}
+		
+		&--previous
+		{
+			left: 15px;
+		}
+		
+		&--next
+		{
+			right: 15px;
+		}
+	}
+
+	&__navigator
+	{
+		width: 100%;
+		position: absolute;
+		bottom: 2em;
+
+		& > ul
+		{
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			list-style: none;
+		}
+
+		&__dot
+		{
+			height: 1.3em;
+			width: 1.3em;
+			border-radius: 50%;
+			border: 0.2em solid $main-light; 
+			display: inline-block;
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
+			transition: border-color 0.3s;
+			margin-left: 0.5em;
+			margin-right: 0.5em;
+
+			&:hover
+			{
+				border-color: $main-color;
+				cursor: pointer;
+			}
+
+			&--current
+			{
+				background-color: $main-light;
+				transition: border-color 0.3s, background-color 0.3s;
+
+				&:hover
+				{
+					background-color: $main-color;
+				}
+			}
+		}
+	}
+}
