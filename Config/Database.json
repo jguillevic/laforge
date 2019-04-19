@@ -1,0 +1,6 @@
+{
+	"Host":"localhost"
+	, "DbName":"laforge"
+	, "Username":"root"
+	, "Password":""
+}
