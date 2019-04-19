@@ -1,0 +1,36 @@
+<script src="../Assets/js/module/disqus.js"></script>
+
+<?php
+$post = $params["post"];
+
+setlocale(LC_TIME, 'fr_FR.utf8','fra');
+?>
+			
+<section>
+	<article class="post">
+		<header class="post__header">
+			<img class="post__header__img" src="<?= $post->GetImage()->GetRelativePath(); ?>">
+			<section class="post__header__info">
+				<h1 class="post__header__info__title"><?= $post->GetTitle(); ?></h1>
+				<div class="post__header__info__complement">
+					<span class="post__header__info__complement__date"><?= strftime("%e %B %G, %H:%M:%S", date_create($post->GetCreationDate())->getTimestamp()); ?></span>
+				</div>
+			</section>
+		</header>
+		<section class="l-post-content post-content">
+					<section class="post-content__description">
+						<p><?= $post->GetDescription(); ?></p>
+					</section>
+					<section class="post-content__socialbar">
+						<div class="button--facebook"><i class="fab fa-facebook-f"></i></div>
+						<div class="button--twitter"><i class="fab fa-twitter"></i></div>
+						<div class="button--linkedin"><i class="fab fa-linkedin-in"></i></div>
+						<div class="button--mail"><i class="fas fa-envelope"></i></div>
+					</section>
+					<section class="post-content__text">
+						<?= $post->GetContent(); ?>
+					</section>
+					<div id="disqus_thread"></div>
+		</section>
+	</article>
+</section>

@@ -1,0 +1,92 @@
+<?php
+use \Framework\Tools\Helper\RoutesHelper;
+use \Tools\Helper\UserHelper;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>La Forge d'Audren</title>
+	<link rel="stylesheet" type="text/css" href="../Assets/css/style.css"> 	
+	<script type="text/javascript" src="../Assets/js/jquery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../Assets/js/jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="../Assets/js/module/nav.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700" rel="stylesheet">
+</head>
+<body>
+	<header class="l-header header">
+		<nav class="nav">
+			<a class="nav__logo" href="<?= RoutesHelper::Path("DisplayHome"); ?>">La Forge d'Audren</a>
+			<span class="nav__menu">
+				<?php
+					if (!UserHelper::IsLogin())
+					{
+				?>
+				<a href="<?= RoutesHelper::Path("LoginUser"); ?>">
+					<span>Connexion</span>
+				</a>
+				<?php 
+					} 
+					else 
+					{
+				?>
+				<a href="<?= RoutesHelper::Path("LogoutUser"); ?>">
+					<span>Déconnexion</span>
+				</a>
+				<?php
+					}
+				?>
+			</span>
+			<span class="nav__burger">
+				<i class="fas fa-bars"></i>
+			</span>
+		</nav>
+		<section id="nav__overlay" class="nav__overlay">
+			<section class="nav__overlay__content">
+				<ul>
+					<li><a class="nav__overlay__menu-item-home" href="<?= RoutesHelper::Path("DisplayHome"); ?>">Accueil</a></li><!--
+					<?php 
+					if (UserHelper::IsLogin())
+					{
+					?>
+					--><li><span class="nav__overlay__menu-item-drop nav__overlay__menu-item-drop--down nav__overlay__menu-item-admin">Administration</span><!--
+						--><ul class="nav__overlay__menu-subitem-content">
+							<li><a class="nav__overlay__menu-item" href="<?= RoutesHelper::Path("ManageImage"); ?>">Images</a></li><!--
+							--><li><a class="nav__overlay__menu-item" href="<?= RoutesHelper::Path("ManageCategory"); ?>">Catégories</a></li><!--
+							--><li><a class="nav__overlay__menu-item" href="<?= RoutesHelper::Path("ManagePost"); ?>">Articles</a></li>
+						</ul>
+					</li><!--
+					--><?php } ?><!--
+					--><li><span class="nav__overlay__menu-item-drop nav__overlay__menu-item-drop--down nav__overlay__menu-item-category">Catégories</span>
+						<ul class="nav__overlay__menu-subitem-content">
+							<li><a class="nav__overlay__menu-item" href="">Catégorie 1</a></li><!--
+							--><li><a class="nav__overlay__menu-item" href="">Catégorie 2</a></li><!--
+							--><li><a class="nav__overlay__menu-item" href="">Catégorie 3</a></li>
+						</ul>
+					</li><!--
+					--><li><a class="nav__overlay__menu-item-contact" href="<?= RoutesHelper::Path("DisplayContact"); ?>">Contact</a></li><!--
+					--><li><a class="nav__overlay__menu-item-about" href="<?= RoutesHelper::Path("DisplayAbout"); ?>">A propos</a></li>
+				</ul>
+			</section>
+			<div class="nav__overlay__close">
+				<i class="fas fa-times"></i>
+			</div>
+		</section>
+	</header>
+	<main class="l-main main">
+		<?php
+			if (isset($this->content))
+			{
+				include($this->content);
+			} 
+		?>
+	</main>
+	<footer class="l-footer footer">
+		<p class="footer__copyright">
+			La Forge d'Audren © Copyright 2019
+		</p>
+	</footer>
+</body>
+</html>

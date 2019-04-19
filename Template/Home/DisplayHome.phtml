@@ -1,0 +1,112 @@
+<?php
+use \Framework\Tools\Helper\RoutesHelper;
+
+$posts = $params["posts"];
+?>
+
+<script src="../Assets/js/module/carousel.js"></script>
+<script id="dsq-count-scr" src="//devnmore.disqus.com/count.js" async></script>
+
+<section class="carousel">
+	<ul>
+<?php
+// Nombre d'articles affichés dans le carousel.
+$carouselPostCount = 5;
+foreach ($posts as $post) 
+{
+?>
+   		<li class="carousel__item">
+			<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ]); ?>">
+   				<img class="carousel__item__image" src="<?= $post->GetImage()->GetRelativePath(); ?>">
+   				<section class="carousel__item__info">
+   					<div class="carousel__item__info__title"><?= $post->GetTitle(); ?></div>
+   					<div class="carousel__item__info__description">
+   						<p><?= $post->GetDescription(); ?></p>
+    				</div>
+				</section>
+			</a>
+    	</li>
+<?php
+	$carouselPostCount--;
+	if ($carouselPostCount <= 0)
+		break;
+}
+?>
+	</ul>
+	<button class="carousel__button carousel__button--previous"><i class="fas fa-chevron-left"></i></button>
+	<button class="carousel__button carousel__button--next"><i class="fas fa-chevron-right"></i></button>
+</section>
+
+<section class="l-content content">
+<?php
+$index = 0;
+
+foreach ($posts as $post) 
+{
+	if ($index === 0)
+	{
+?>
+	<article class="thumbnail-post">
+  		<header class="thumbnail-post__miniature">
+  			<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ]); ?>">
+				<img src="<?= $post->GetImage()->GetRelativePath(); ?>">
+			</a>
+		</header>
+		<section class="thumbnail-post__info">
+			<div class="thumbnail-post__info__title">
+				<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ]); ?>">
+					<h2><?= $post->GetTitle(); ?></h2>
+				</a>
+			</div>
+			<div class="thumbnail-post__info__description">
+				<p><?= $post->GetDescription(); ?></p>
+			</div>
+			<div class="thumbnail-post__info__footer">
+				<a class="thumbnail-post__info__footer__category" href=""><?= $post->GetCategory()->GetName(); ?></a>
+				<svg width="1.5em" class="thumbnail-post__info__footer__comments-count" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+					<g>
+						<path d="M768.8,908.9l-91.4-132.4H86.4c-42.2,0-76.4-34.2-76.4-76.4V167.5c0-42.2,34.2-76.4,76.4-76.4h827.2c42,0,76.4,34.2,76.4,76.4v532.9c0,42.2-34.2,76.4-76.4,76.4h-49.1L768.8,908.9z M86.4,143.6c-13.1,0-23.9,10.7-23.9,23.9v532.9c0,13.1,10.7,23.9,23.9,23.9H705l64.8,93.9l67.9-93.9h75.9c13.1,0,23.9-10.7,23.9-23.9V167.5c0-13.1-10.7-23.9-23.9-23.9H86.4z"/>
+						<text x="450" y="580" text-anchor="middle" alignment-baseline="central" font-size="400">
+							<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ])."#disqus_thread"; ?>"></a>
+						</text>
+					</g>
+				</svg>
+			</div>
+		</section>
+	</article>
+<?php
+	}
+	else
+	{
+?>				
+	<article class="thumbnail-small-post">
+  		<header class="thumbnail-small-post__miniature">
+  			<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ]); ?>">
+				<img src="<?= $post->GetImage()->GetRelativePath(); ?>">
+			</a>
+		</header>
+		<section class="thumbnail-small-post__info">
+			<div class="thumbnail-small-post__info__title">
+				<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ]); ?>">
+					<h2><?= $post->GetTitle(); ?></h2>
+				</a>
+			</div>
+			<div class="thumbnail-small-post__info__footer">
+				<a class="thumbnail-small-post__info__footer__category" href=""><?= $post->GetCategory()->GetName(); ?></a>
+				<svg width="1.5em" class="thumbnail-small-post__info__footer__comments-count" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+					<g>
+						<path d="M768.8,908.9l-91.4-132.4H86.4c-42.2,0-76.4-34.2-76.4-76.4V167.5c0-42.2,34.2-76.4,76.4-76.4h827.2c42,0,76.4,34.2,76.4,76.4v532.9c0,42.2-34.2,76.4-76.4,76.4h-49.1L768.8,908.9z M86.4,143.6c-13.1,0-23.9,10.7-23.9,23.9v532.9c0,13.1,10.7,23.9,23.9,23.9H705l64.8,93.9l67.9-93.9h75.9c13.1,0,23.9-10.7,23.9-23.9V167.5c0-13.1-10.7-23.9-23.9-23.9H86.4z"/>
+						<text x="450" y="580" text-anchor="middle" alignment-baseline="central" font-size="400">
+						<a href="<?= RoutesHelper::Path("DisplayPost", [ "slug" => $post->GetSlug() ])."#disqus_thread"; ?>"></a>
+						</text>
+					</g>
+				</svg>
+			</div>
+		</section>
+	</article>
+<?php
+	}
+	$index++;
+}
+?>
+</section>

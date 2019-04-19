@@ -1,0 +1,98 @@
+<?php
+$image = $params["image"];
+if (array_key_exists("mode", $params))
+{
+	$mode = $params["mode"];
+}
+if (array_key_exists("source", $params))
+{
+	$source = $params["source"];
+}
+ 
+if (!isset($mode) || ($mode !== "ADD" && $mode !== "UPDATE") || ($mode === "ADD" && !isset($source)) || (isset($source) && $source !== "LOCAL" && $source !== "URL"))
+{
+?>
+<section>
+	<p>Cas non géré.</p>
+</section>
+<?php	
+}
+else
+{
+?>
+
+<script type="text/javascript" src="../Assets/js/jquery/jquery-validate-1.17.0.min.js"></script>
+<script src="../Assets/js/form/image-form.js"></script>
+
+<form id="image-form" class="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST" enctype="multipart/form-data">
+	<h1><?php if ($mode === "ADD") { echo "Ajouter"; } else { echo "Mettre à jour"; } ?> une image</h1>
+	<section class="form__content">
+		<input type="hidden" id="source" name="source" value="<?= $source; ?>">
+<?php
+	if ($mode === "ADD")
+	{
+		if ($source === "LOCAL")
+		{
+?>
+		<section class="form__validation-container">
+			<section class="form__input-container">
+				<label class="form__input-container__label" for="image-local-chooser">Sélectionnez un fichier</label>
+				<input class="form__input-container__input" type="file" accept="image/*" id="image-local-chooser" name="image-local-chooser">
+			</section>
+		</section>
+<?php
+		}
+		else if ($source === "URL")
+		{
+?>
+		<section class="form__validation-container">
+			<section class="form__input-container">
+				<label class="form__input-container__label" for="image-url">Url</label>
+				<input class="form__input-container__input" type="text" id="image-url" name="image-url">
+			</section>
+		</section>
+<?php
+		}
+?>
+		<section>
+			Aperçu
+			<img id="image-preview" src="">
+		</section>
+<?php
+	}
+?>
+		<input type="hidden" id="image-id" name="image-id" value="<?= $image->GetId(); ?>">
+		<input type="hidden" id="image-path" name="image-path" value="<?= $image->GetPath(); ?>">
+		<section class="form__validation-container">
+			<section class="form__input-container">
+				<label class="form__input-container__label" for="image-name">Nom</label>
+				<input class="form__input-container__input" type="text" id="image-name" name="image-name" value="<?= $image->GetName(); ?>" maxlength="35">
+			</section>
+		</section>
+		<section class="form__validation-container">
+			<section class="form__input-container">
+				<label class="form__input-container__label" for="image-extension">Extension</label>
+				<input class="form__input-container__input" type="text" id="image-extension" name="image-extension" value="<?= $image->GetExtension(); ?>" maxlength="10">
+			</section>
+		</section>
+		<section class="form__validation-container">
+			<section class="form__input-container">
+				<label class="form__input-container__label" for="image-is-visible">Visible ?</label>
+				<input class="form__input-container__input" type="checkbox" id="image-is-visible" name="image-is-visible" <?php if ($image->GetIsVIsible()) { echo "checked"; } ?>>
+			</section>
+		</section>
+	</section>
+	<section class="form__buttons">
+		<ul>
+			<li>
+				<button class="button--save" type="submit" id="image-save">Enregistrer</button>
+			</li><!--
+			--><li>
+				<button class="button--reset" type="reset" id="image-reset">Réinitialiser</button>
+			</li>
+		</ul>
+	</section>
+</form>
+<?php
+}
+?>

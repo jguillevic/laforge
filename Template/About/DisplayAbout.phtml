@@ -1,0 +1,68 @@
+<?php
+use \Model\Day\Day;
+use \Model\Store\Schedule\Schedule;
+use \Model\Store\Schedule\DaySchedule;
+use \Model\Store\Schedule\DayScheduleSection;
+
+$schedule = $params["schedule"];
+?>
+
+<section class="l-content content">
+<article>
+		<header>
+			<h2>Contact</h2>
+		</header>
+		<section>
+			<section>
+				<h3><span><i class="far fa-calendar-alt"></i></span> Nos horaires</h3>
+				<table>
+<?php foreach ($schedule->GetDaySchedules() as $daySchedule) : ?>
+					<tr>
+						<th><?= $daySchedule->GetDay()->GetLabel();?></th>
+						<th>:</th>
+						<th>
+	<?php if ($daySchedule->IsOpen()): ?>
+		<?php $i=0; ?>
+		<?php foreach ($daySchedule->GetSections() as $section): ?>
+							<?= $i > 0 ? '/' : '' ?> 
+							<?= $section->GetStartingTime()->format('H:i') ?>-<?= $section->GetEndingTime()->format('H:i') ?>
+			<?php $i++; ?>
+		<?php endforeach; ?>
+	<?php else: ?>
+							Fermé
+	<?php endif; ?>
+						</th>
+					</tr>
+<?php endforeach; ?>
+				</table>
+			</section>
+
+			<section>
+				<h3><span><i class="fas fa-envelope"></i></span> Nous contacter</h3>
+				<span><i class="fas fa-at"></i></span>
+				<p><a href="mailto:audren.forge@sfr.fr">audren.forge@sfr.fr</a></p>
+				<span><i class="fab fa-facebook-messenger"></i></span>
+				<p><a href="https://m.me/164158920348705">Messenger</a></p>
+				<span><i class="fas fa-phone"></i></span>
+				<p><a href="tel:03.60.29.94.89">03.60.29.94.89</a></p>
+			</section>
+
+			<section>
+				<h3><span><i class="fas fa-map-marker-alt"></i></span> Nous trouver</h3>
+				<address>
+					<p>La Forge d'Audren</p>
+					<p>6 rue Vincent de Beauvais</p>
+					<p>60000 BEAUVAIS</p>
+				</address>
+			</section>
+			
+			<section>
+				<h3><span><i class="fas fa-share-alt"></i></span> Nous suivre</h3>
+				<a href="https://www.facebook.com/La-Forge-dAudren-164158920348705"><i class="fab fa-facebook"></i></a>
+				<a href="https://twitter.com/LaForgedAudren"><i class="fab fa-twitter"></i></a>
+				<a href="https://www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ"><i class="fab fa-youtube"></i></a>
+				<a href="https://www.instagram.com/renaudlepage/"><i class="fab fa-instagram"></i></a>
+			</section>
+		</section>
+	</article>
+</section>
