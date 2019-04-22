@@ -17,6 +17,7 @@ class Day
 
     private $id;
     private $code;
+    private $label;
 
     public function GetId()
     {
@@ -40,24 +41,11 @@ class Day
 
     public function GetLabel()
     {
-        switch ($this->code)
-        {
-            case SELF::MON:
-                return 'Lundi';
-            case SELF::TUE:
-                return 'Mardi';
-            case SELF::WED:
-                return 'Mercredi';
-            case SELF::THU:
-                return 'Jeudi';
-            case SELF::FRI:
-                return 'Vendredi';
-            case SELF::SAT:
-                return 'Samedi';
-            case SELF::SUN:
-                return 'Dimanche';
-            default:
-                throw new Exception('Not implemented.');
-        }
+        return $this->label;
+    }
+
+    public function SetLabel($label)
+    {
+        $this->label = $label;
     }
 }

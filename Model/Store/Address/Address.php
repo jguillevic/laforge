@@ -50,6 +50,11 @@ class Address
         return $this->line2;
     }
 
+    public function HasLine2()
+    {
+        return $this->line2 != null;
+    }
+
     public function SetLine2($line2)
     {
         $this->line2 = $line2;
@@ -58,6 +63,11 @@ class Address
     public function GetLine3()
     {
         return $this->line3;
+    }
+
+    public function HasLine3()
+    {
+        return $this->line3 != null;
     }
 
     public function SetLine3($line3)

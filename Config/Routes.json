@@ -19,13 +19,13 @@
 	}
 	, {
 		"Path":"/user/login"
-		, "Controller":"UserController"
+		, "Controller":"User\\UserController"
 		, "Action":"Login"
 		, "Name":"LoginUser"
 	}
 	, {
 		"Path":"/user/logout"
-		, "Controller":"UserController"
+		, "Controller":"User\\UserController"
 		, "Action":"Logout"
 		, "Name":"LogoutUser"
 	}
@@ -49,50 +49,56 @@
 	}
 	, {
 		"Path":"/post/manage"
-		, "Controller":"PostController"
+		, "Controller":"Blog\\PostController"
 		, "Action":"Manage"
 		, "Name":"ManagePost"
 	}
 	, {
 		"Path":"/post/display"
-		, "Controller":"PostController"
+		, "Controller":"Blog\\PostController"
 		, "Action":"Display"
 		, "Name":"DisplayPost"
 	}
 	, {
 		"Path":"/post/add"
-		, "Controller":"PostController"
+		, "Controller":"Blog\\PostController"
 		, "Action":"Add"
 		, "Name":"AddPost"
 	}
 	, {
 		"Path":"/post/update"
-		, "Controller":"PostController"
+		, "Controller":"Blog\\PostController"
 		, "Action":"Update"
 		, "Name":"UpdatePost"
 	}
 	, {
 		"Path":"/post/delete"
-		, "Controller":"PostController"
+		, "Controller":"Blog\\PostController"
 		, "Action":"Delete"
 		, "Name":"DeletePost"
 	}
 	, {
 		"Path":"/category/manage"
-		, "Controller":"CategoryController"
+		, "Controller":"Blog\\CategoryController"
 		, "Action":"Manage"
 		, "Name":"ManageCategory"
 	}
 	, {
 		"Path":"/category/add"
-		, "Controller":"CategoryController"
+		, "Controller":"Blog\\CategoryController"
 		, "Action":"Add"
 		, "Name":"AddCategory"
 	}
 	, {
 		"Path":"/category/update"
-		, "Controller":"CategoryController"
+		, "Controller":"Blog\\CategoryController"
 		, "Action":"Update"
 		, "Name":"UpdateCategory"
+	}
+	, {
+		"Path":"/store/update"
+		, "Controller":"Store\\StoreController"
+		, "Action":"Update"
+		, "Name":"UpdateStore"
 	}
 ]

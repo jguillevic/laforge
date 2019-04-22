@@ -21,7 +21,7 @@ class DayDAL
     
     public function LoadAll()
     {
-        $query = "SELECT D.Id, D.Code FROM Day AS D;";
+        $query = "SELECT D.Id, D.Code, D.Label FROM Day AS D;";
 
         $rows = $this->db->Read($query);
 
@@ -32,6 +32,7 @@ class DayDAL
             $day = new Day();
             $day->SetId($row['Id']);
             $day->SetCode($row['Code']);
+            $day->SetLabel($row['Label']);
 
             $days[$day->GetId()] = $day;
         }

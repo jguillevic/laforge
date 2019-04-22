@@ -29,7 +29,7 @@ class Contact
 
     public function SetEmail($email)
     {
-        $this->email = $email
+        $this->email = $email;
     }
 
     public function GetMessenger()
@@ -47,7 +47,7 @@ class Contact
         return $this->phoneNumber;
     }
 
-    public function GetPhoneNumber($phoneNumber)
+    public function SetPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }

@@ -25,7 +25,7 @@ class Store
         return $this->address;
     }
 
-    public fucntion SetAddress($address)
+    public function SetAddress($address)
     {
         $this->address = $address;
     }
@@ -47,7 +47,7 @@ class Store
 
     public function SetContact($contact)
     {
-        $this->contact = $contact
+        $this->contact = $contact;
     }
 
     public function GetSchedule()

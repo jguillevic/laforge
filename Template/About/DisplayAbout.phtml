@@ -1,11 +1,18 @@
 <?php
 use \Model\Day\Day;
 use \Model\Store\Store;
+use \Model\Store\Social\Social;
+use \Model\Store\Address\Address;
+use \Model\Store\Contact\Contact;
 use \Model\Store\Schedule\Schedule;
 use \Model\Store\Schedule\DaySchedule;
 use \Model\Store\Schedule\DayScheduleSection;
 
 $store = $params["store"];
+$social = $store->GetSocial();
+$address = $store->GetAddress();
+$contact = $store->GetContact();
+$schedule = $store->GetSchedule();
 ?>
 
 <section class="l-content content">
@@ -17,11 +24,11 @@ $store = $params["store"];
 			<section>
 				<h3><span><i class="far fa-calendar-alt"></i></span> Nos horaires</h3>
 				<table>
-<?php foreach ($store->GetSchedule()->GetDaySchedules() as $daySchedule) : ?>
+<?php foreach ($schedule->GetDaySchedules() as $daySchedule) : ?>
 					<tr>
-						<th><?= $daySchedule->GetDay()->GetLabel();?></th>
-						<th>:</th>
-						<th>
+						<td><?= $daySchedule->GetDay()->GetLabel();?></td>
+						<td>:</td>
+						<td>
 	<?php if ($daySchedule->IsOpen()): ?>
 		<?php $i=0; ?>
 		<?php foreach ($daySchedule->GetSections() as $section): ?>
@@ -32,7 +39,7 @@ $store = $params["store"];
 	<?php else: ?>
 							Fermé
 	<?php endif; ?>
-						</th>
+						</td>
 					</tr>
 <?php endforeach; ?>
 				</table>
@@ -41,19 +48,25 @@ $store = $params["store"];
 			<section>
 				<h3><span><i class="fas fa-envelope"></i></span> Nous contacter</h3>
 				<span><i class="fas fa-at"></i></span>
-				<p><a href="mailto:audren.forge@sfr.fr">audren.forge@sfr.fr</a></p>
+				<p><a href="mailto:<?= $contact->GetEmail(); ?>"><?= $contact->GetEmail(); ?></a></p>
 				<span><i class="fab fa-facebook-messenger"></i></span>
-				<p><a href="https://m.me/164158920348705">Messenger</a></p>
+				<p><a href="<?= $contact->GetMessenger(); ?>">Messenger</a></p>
 				<span><i class="fas fa-phone"></i></span>
-				<p><a href="tel:03.60.29.94.89">03.60.29.94.89</a></p>
+				<p><a href="tel:<?= $contact->GetPhoneNumber(); ?>"><?= $contact->GetPhoneNumber(); ?></a></p>
 			</section>
 
 			<section>
 				<h3><span><i class="fas fa-map-marker-alt"></i></span> Nous trouver</h3>
 				<address>
-					<p>La Forge d'Audren</p>
-					<p>6 rue Vincent de Beauvais</p>
-					<p>60000 BEAUVAIS</p>
+					<p><?= $address->GetSocialReason(); ?></p>
+					<p><?= $address->GetLine1(); ?></p>
+<?php if ($address->HasLine2()): ?>
+					<p><?= $address->GetLine2(); ?></p>
+<?php endif; ?>
+<?php if ($address->HasLine3()): ?>
+					<p><?= $address->GetLine3(); ?></p>
+<?php endif; ?>
+					<p><?= $address->GetPostalCode(); ?> <?= $address->GetCity(); ?></p>
 				</address>
 			</section>
 			

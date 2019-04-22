@@ -4,18 +4,46 @@ CREATE DATABASE laforge;
 
 USE laforge;
 
+CREATE TABLE Right
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Code NVARCHAR(10) NOT NULL
+	, Label NVARCHAR(200) NOT NULL
+	, PRIMARY KEY (Id)
+);
+
+CREATE TABLE Role
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Label NVARCHAR(200) NOT NULL
+	, PRIMARY KEY (Id)
+);
+
+CREATE TABLE Role_Right
+(
+	RoleId INT NOT NULL
+	, RightId INT NOT NULL
+	, PRIMARY KEY (RoleId, RightId)
+	, FOREIGN KEY (RoleId) REFERENCES Role(Id)
+	, FOREIGN KEY (RightId) REFERENCES Right(Id)
+);
+
 CREATE TABLE User
 (
 	Id INT NOT NULL AUTO_INCREMENT
-	, Username NVARCHAR(35) NOT NULL
-	, Password NVARCHAR(100) NOT NULL
+	, Username NVARCHAR(200) NOT NULL
+	, Salt NVARCHAR(200) NOT NULL
+	, Password NVARCHAR(200) NOT NULL
+	, Email NVARCHAR(200) NOT NULL
+	, RoleId INT NOT NULL
 	, PRIMARY KEY (Id)
+	, FOREIGN KEY (RoleId) REFERENCES Role(Id)
 );
 
 CREATE TABLE Category
 (
 	Id INT NOT NULL AUTO_INCREMENT
-	, Name NVARCHAR(35) NOT NULL
+	, Name NVARCHAR(200) NOT NULL
 	, Color BINARY(3) NOT NULL
 	, IsVisible BOOLEAN NOT NULL
 	, PRIMARY KEY (Id)
@@ -60,6 +88,7 @@ CREATE TABLE Day
 (
 	Id INT NOT NULL AUTO_INCREMENT
 	, Code NVARCHAR(10)
+	, Label NVARCHAR(50)
 	, PRIMARY KEY (Id)
 );
 
@@ -135,20 +164,44 @@ CREATE TABLE Store
 );
 
 
-INSERT INTO User (Username, Password)
-VALUES ('Admin', 'n756JWnb');
+
+INSERT INTO Right (Id, Code, Label)
+VALUES (1, 'MAN_USER', 'Gérer les utilisateurs')
+, (2, 'MAN_POST', 'Gérer les articles')
+, (3, 'MAN_CAT', 'Gérer les catégories')
+, (4, 'MAN_STORE', 'Gérer les informations du magasin')
+, (5, 'MAN_EVENT', 'Gérer les événements')
+, (6, 'PROP_EVENT', 'Proposer des événements');
+
+INSERT INTO Role (Id, Label)
+VALUES (1, 'Administrateur')
+, (2, 'Editeur')
+, (3, 'Spectateur');
+
+INSERT INTO Role_Right (RoleId, RightId)
+VALUES (1, 1)
+, (1, 2)
+, (1, 3)
+, (1, 4)
+, (1, 5)
+, (2, 2)
+, (2, 3)
+, (3, 6);
+
+INSERT INTO User (1, Username, Salt, Password, Email, RoleId)
+VALUES (1, 'admin', '', '', 'admin@gmail.com', 1);
 
 INSERT INTO ExtendedProperty (Name, Value)
 VALUES ('DBVersion', '1.00.000');
 
-INSERT INTO Day (Id, Code)
-VALUES (1, 'MONDAY')
-, (2, 'TUESDAY')
-, (3, 'WEDNESDAY')
-, (4, 'THURSDAY')
-, (5, 'FRIDAY')
-, (6, 'SATURDAY')
-, (7, 'SUNDAY');
+INSERT INTO Day (Id, Code, Label)
+VALUES (1, 'MONDAY', 'Lundi')
+, (2, 'TUESDAY', 'Mardi')
+, (3, 'WEDNESDAY', 'Mercredi')
+, (4, 'THURSDAY', 'Jeudi')
+, (5, 'FRIDAY', 'Vendredi')
+, (6, 'SATURDAY', 'Samedi')
+, (7, 'SUNDAY', 'Dimanche');
 
 INSERT INTO Schedule (Id)
 VALUES (1);
@@ -175,7 +228,7 @@ VALUES (1, 2, '10:00', '12:00')
 , (10, 6, '13:00', '19:00');
 
 INSERT INTO Social (Id, FacebookLink, TwitterLink, YoutubeLink, InstagramLink)
-VALUES (1, 'https://www.facebook.com/La-Forge-dAudren-164158920348705', 'https://twitter.com/LaForgedAudren', 'https://www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ', 'https://www.instagram.com/renaudlepage/');
+VALUES (1, 'www.facebook.com/La-Forge-dAudren-164158920348705', 'www.twitter.com/LaForgedAudren', 'www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ', 'www.instagram.com/renaudlepage/');
 
 INSERT INTO Contact (Id, Email, Messenger, PhoneNumber)
 VALUES (1, 'audren.forge@sfr.fr', 'https://m.me/164158920348705', '03.60.29.94.89');

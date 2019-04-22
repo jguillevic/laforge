@@ -3,6 +3,7 @@
 namespace DAL\Store\Address;
 
 use \Framework\DAL\Database;
+use \Framework\DAL\DALHelper;
 use \Model\Store\Address\Address;
 
 /**
@@ -45,5 +46,32 @@ class AddressDAL
         }
 
         return $addresses;
+    }
+
+    public function Update($addresses)
+    {
+        $query = "UPDATE address
+            SET SocialReason = :SocialReason
+            , Line1 = :Line1
+            , Line2 = :Line2
+            , Line3 = :Line3
+            , PostalCode = :PostalCode
+            , City = :City
+            WHERE Id = :Id;";
+
+        foreach ($addresses as $address)
+        {
+            $params = [
+                'Id' => $address->GetId()
+                , 'SocialReason' => $address->GetSocialReason()
+                , 'Line1' => $address->GetLine1()
+                , 'Line2' => $address->GetLine2()
+                , 'Line3' => $address->GetLine3()
+                , 'PostalCode' => $address->GetPostalCode()
+                , 'City' => $address->GetCity()
+            ];
+
+            $this->db->Execute($query, $params);
+        }
     }
 }

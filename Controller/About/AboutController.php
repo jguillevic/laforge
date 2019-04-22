@@ -11,7 +11,7 @@ class AboutController
 	public function Display($queryParameters)
 	{
 		// Chargement des infos du magasin.
-		$storeBLL = new ScheduleBLL();
+		$storeBLL = new StoreBLL();
 		$stores = $storeBLL->LoadAll();
 		// Récupération d'une valeur qui est la seule.
 		$store = array_pop($stores);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Controller\Blog;
 
 use \Framework\View\View;
 use \Tools\Helper\UserHelper;

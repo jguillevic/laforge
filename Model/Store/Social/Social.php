@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Store\Contact;
+namespace Model\Store\Social;
 
 /**
  * @author JGuillevic

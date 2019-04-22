@@ -2,8 +2,8 @@
 
 namespace Model\Blog;
 
-use \Model\Category;
-use \Model\Image;
+use \Model\Blog\Category;
+use \Model\Blog\Image;
 
 class Post
 {

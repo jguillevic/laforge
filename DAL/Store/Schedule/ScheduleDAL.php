@@ -3,6 +3,7 @@
 namespace DAL\Store\Schedule;
 
 use \Framework\DAL\Database;
+use \Framework\DAL\DALHelper;
 use \Model\Store\Schedule\Schedule;
 use \Model\Store\Schedule\DaySchedule;
 use \Model\Store\Schedule\ScheduleSection;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Controller\Blog;
 
 use \Model\Blog\Post;
 use \Model\Blog\Category;
@@ -133,11 +133,17 @@ class PostController
 			$post->SetIsPublished($queryParameters["post-is-published"]->GetValue() === "on");
 		}
 
-		$categoryId = $queryParameters["post-category-id"]->GetValue();
-		$post->SetCategory($categories[$categoryId]);
+		if (array_key_exists("post-category-id", $queryParameters))
+		{
+			$categoryId = $queryParameters["post-category-id"]->GetValue();
+			$post->SetCategory($categories[$categoryId]);
+		}
 
-		$imageId = $queryParameters["post-image-id"]->GetValue();
-		$post->SetImage($images[$imageId]);
+		if (array_key_exists("post-image-id", $queryParameters))
+		{
+			$imageId = $queryParameters["post-image-id"]->GetValue();
+			$post->SetImage($images[$imageId]);
+		}
 	}
 
 	public function Delete($queryParameters)

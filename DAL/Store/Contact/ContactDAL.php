@@ -3,6 +3,7 @@
 namespace DAL\Store\Contact;
 
 use \Framework\DAL\Database;
+use \Framework\DAL\DALHelper;
 use \Model\Store\Contact\Contact;
 
 /**
@@ -42,5 +43,26 @@ class ContactDAL
         }
 
         return $contacts;
+    }
+
+    public function Update($contacts)
+    {
+        $query = "UPDATE contact
+            Email = :Email
+            , Messenger = :Messenger
+            , PhoneNumber = :PhoneNumber
+            WHERE Id = :Id;";
+
+        foreach ($contacts as $contact)
+        {
+            $params = [
+                'Id' => $contact->GetId()
+                , 'Email' => $contact->GetEmail()
+                , 'Messenger' => $contact->GetMessenger()
+                , 'PhoneNumber' => $contact->GetPhoneNumber()
+            ];
+
+            $this->db->Execute($query, $params);
+        }
     }
 }

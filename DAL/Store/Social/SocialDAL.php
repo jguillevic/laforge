@@ -3,6 +3,7 @@
 namespace DAL\Store\Social;
 
 use \Framework\DAL\Database;
+use \Framework\DAL\DALHelper;
 use \Model\Store\Social\Social;
 
 /**
@@ -43,5 +44,28 @@ class SocialDAL
         }
 
         return $socials;
+    }
+
+    public function Update($socials)
+    {
+        $query = "UPDATE Social
+                SET FacebookLink = :FacebookLink
+                , TwitterLink = :TwitterLink
+                , YoutubeLink = :YoutubeLink
+                , InstagramLink = :InstagramLink
+                WHERE Id = :Id;"
+
+        foreach ($socials as $social)
+        {
+            $params = [
+                'Id' => $social->GetId()
+                , 'FacebookLink' => $social->GetFacebookLink()
+                , 'TwitterLink' => $social->GetTwitterLink()
+                , 'YoutubeLink' => $social->GetYoutubeLink()
+                , 'InstagramLink' => $social->GetInstagramLink()
+            ];
+
+            $this->db->Execute($query, $params);
+        }
     }
 }
