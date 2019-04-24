@@ -87,7 +87,7 @@ class StoreDAL
         foreach ($stores as $store)
         {
             $addresses[$store->GetAddress()->GetId()] = $store->GetAddress();
-            $contacts[$store->GetContat()->GetId()] = $store->GetContact();
+            $contacts[$store->GetContact()->GetId()] = $store->GetContact();
             $socials[$store->GetSocial()->GetId()] = $store->GetSocial();
             $schedules[$store->GetSchedule()->GetId()] = $store->GetSchedule();
         }

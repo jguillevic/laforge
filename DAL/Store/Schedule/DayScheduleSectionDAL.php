@@ -23,10 +23,10 @@ class DayScheduleSectionDAL
 
     public function LoadByDayScheduleIds($dayScheduleIds)
     {
-        $query = "SELECT DSS.Id, DSS.DayScheduleId, DSS.DayScheduleId, DSS.StartingTime, DSS.EndingTime FROM DayScheduleSection AS DSS WHERE ";
+        $query = "SELECT DSS.Id, DSS.DayScheduleId, DSS.StartingTime, DSS.EndingTime FROM DayScheduleSection AS DSS WHERE ";
         $params = array();
         $query .= DALHelper::SetArrayParams($dayScheduleIds, "DSS", "DayScheduleId", $params);
-        $query .= ";";
+        $query .= "ORDER BY DSS.StartingTime ASC;";
 
 		$rows = $this->db->Read($query, $params);
 
@@ -53,9 +53,9 @@ class DayScheduleSectionDAL
 
     public function DeleteFromDayScheduleIds($dayScheduleIds)
     {
-        $query = "DELETE FROM DayScheduleSection AS DSS WHERE ";
+        $query = "DELETE FROM DayScheduleSection WHERE ";
         $params = array();
-        $query .= DALHelper::SetArrayParams($dayScheduleIds, "DSS", "DayScheduleId", $params);
+        $query .= DALHelper::SetArrayParams($dayScheduleIds, "DayScheduleSection", "DayScheduleId", $params);
         $query .= ";";
 
         $this->db->Execute($query, $params);
@@ -63,15 +63,15 @@ class DayScheduleSectionDAL
 
     public function Add($dayScheduleSections)
     {
-        $qery = "INSERT INTO DayScheduleSection (DayScheduleId, StartingTime, EndingTime)
+        $query = "INSERT INTO DayScheduleSection (DayScheduleId, StartingTime, EndingTime)
             VALUES (:DayScheduleId, :StartingTime, :EndingTime);";
 
         foreach ($dayScheduleSections as $dayScheduleSection)
         {
             $params = [];
             $params["DayScheduleId"] = $dayScheduleSection->GetDayScheduleId();
-            $params["StartingTime"] = $dayScheduleSection->GetStartingTime();
-            $params["EndingTime"] = $dayScheduleSection->GetEndingTime();
+            $params["StartingTime"] = ($dayScheduleSection->GetStartingTime() != null) ? $dayScheduleSection->GetStartingTime()->format("H:i") : null;
+            $params["EndingTime"] = ($dayScheduleSection->GetEndingTime() != null) ? $dayScheduleSection->GetEndingTime()->format("H:i") : null;
 
             $this->db->Execute($query, $params);
         }

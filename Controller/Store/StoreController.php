@@ -25,25 +25,21 @@ class StoreController
         if (UserHelper::CanManageStore())
 		{
             $storeBLL = new StoreBLL();
+            $path = PathHelper::GetPath([ "Store", "ManageStore" ]);
+            $view = new View($path);
 
-            if ($_SERVER['REQUEST_METHOD'] === 'GET')
-			{
-                $storeBLL = new StoreBLL();
-                $stores = $storeBLL->LoadAll();
-                $store = array_pop($stores);
-
-                $path = PathHelper::GetPath([ "Store", "ManageStore" ]);
-                $view = new View($path);
-
-                return $view->Render(["store" => $store]);
-            }
-            else if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') 
             {
                 $store = new Store();
                 self::MapStore($store, $queryParameters);
 
                 $storeBLL->Update([ $store->GetId() => $store ]);
             }
+
+            $stores = $storeBLL->LoadAll();
+            $store = array_pop($stores);
+
+            return $view->Render(["store" => $store]);
         }
 
         RoutesHelper::Redirect("DisplayHome");
@@ -51,15 +47,26 @@ class StoreController
 
     private static function MapStore($store, $queryParameters)
     {
-        self::MapContact($store->GetContact(), $queryParameters);
-        self::MapAddress($store->GetAddress(), $queryParameters);
-        self::MapSocial($store->GetSocial(), $queryParameters);
-        self::MapSchedule($store->GetSchedule(), $queryParameters);
+        $contact = new Contact();
+        self::MapContact($contact, $queryParameters);
+        $store->SetContact($contact);
+
+        $address = new Address();
+        self::MapAddress($address, $queryParameters);
+        $store->SetAddress($address);
+
+        $social = new Social();
+        self::MapSocial($social, $queryParameters);
+        $store->SetSocial($social);
+
+        $schedule = new Schedule();
+        self::MapSchedule($schedule, $queryParameters);
+        $store->SetSchedule($schedule);
     }
 
     private static function MapContact($contact, $queryParameters)
     {
-        $contact->SetId($queryParameters["store-contact-id"])->GetValue());
+        $contact->SetId($queryParameters["store-contact-id"]->GetValue());
         $contact->SetEmail($queryParameters["store-contact-email"]->GetValue());
         $contact->SetPhoneNumber($queryParameters["store-contact-phonenumber"]->GetValue());
         $contact->SetMessenger($queryParameters["store-contact-messenger"]->GetValue());
@@ -96,32 +103,51 @@ class StoreController
             {
                 $explodeResult = explode("-", $key);
 
-                $dayScheduleId = intval(explode(":", $explodeResult[3])[1]);
-                $dayId = intval(explode(":", $splitResult[4])[1]);
-                $sectionId = intval(explode(":", $splitResult[6])[1]);
-                $time = $splitResult[7];
-
-                if (!array_key_exists($dayScheduleId, $schedule->GetDaySchedules())
+                if (count($explodeResult) == 5)
                 {
-                    $daySchedule = new DaySchedule();
-                    $schedule->GetDaySchedules()[$dayScheduleId] = $daySchedule;
-                    $daySchedule->GetDay()->SetId($dayId);
-                    $daySchedule->SetScheduleId($scheduleId);
-                }
-                
-                $daySchedule = $schedule->GetDaySchedules()[$dayScheduleId];
+                    $dayScheduleId = intval(explode(":", $explodeResult[3])[1]);
+                    $dayId = intval(explode(":", $explodeResult[4])[1]);
 
-                if (!array_key_exists($sectionId, $daySchedule->GetSections()))
+                    if (!array_key_exists($dayScheduleId, $schedule->GetDaySchedules()))
+                    {
+                        $daySchedule = new DaySchedule();
+                        $daySchedule->SetId($dayScheduleId);
+                        $daySchedule->GetDay()->SetId($dayId);
+                        $schedule->AddDaySchedule($dayScheduleId, $daySchedule); 
+                    }
+                }
+                else
                 {
-                    $section = new DayScheduleSection();
-                    $daySchedule->GetSections()[$sectionId] = $section;
-                    $section->SetDayScheduleId($dayScheduleId);
-                }
+                    $dayScheduleId = intval(explode(":", $explodeResult[3])[1]);
+                    $dayId = intval(explode(":", $explodeResult[4])[1]);
+                    $sectionId = intval(explode(":", $explodeResult[6])[1]);
+                    $time = $explodeResult[7];
 
-                if ($time == "startingtime")
-                    $section->SetStartingTime(new DateTime($queryParameter->GetValue()));
-                else if ($time == "endingtime")
-                    $section->SetEndingTime(new DateTime($queryParameter->GetValue()));
+                    if (!array_key_exists($dayScheduleId, $schedule->GetDaySchedules()))
+                    {
+                        $daySchedule = new DaySchedule();
+                        $daySchedule->SetId($dayScheduleId);
+                        $daySchedule->GetDay()->SetId($dayId);
+                        $daySchedule->SetScheduleId($scheduleId);
+                        $schedule->AddDaySchedule($dayScheduleId, $daySchedule); 
+                    }
+                    
+                    $daySchedule = $schedule->GetDaySchedules()[$dayScheduleId];
+
+                    if (!array_key_exists($sectionId, $daySchedule->GetSections()))
+                    {
+                        $section = new DayScheduleSection();
+                        $section->SetDayScheduleId($dayScheduleId);
+                        $daySchedule->AddSection($sectionId, $section);  
+                    }
+
+                    $section = $daySchedule->GetSections()[$sectionId];
+
+                    if ($time == "startingtime")
+                        $section->SetStartingTime(new \DateTime($queryParameter->GetValue()));
+                    else if ($time == "endingtime")
+                        $section->SetEndingTime(new \DateTime($queryParameter->GetValue()));
+                }
             }
         }
     }

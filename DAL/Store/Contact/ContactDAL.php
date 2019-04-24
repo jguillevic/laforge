@@ -47,8 +47,8 @@ class ContactDAL
 
     public function Update($contacts)
     {
-        $query = "UPDATE contact
-            Email = :Email
+        $query = "UPDATE Contact
+            SET Email = :Email
             , Messenger = :Messenger
             , PhoneNumber = :PhoneNumber
             WHERE Id = :Id;";

@@ -32,31 +32,41 @@ $schedule = $store->GetSchedule();
 						<input class="form__input-container__input" type="text" id="store-social-twitterlink" name="store-social-twitterlink" value="<?= $social->GetTwitterLink(); ?>">
 					</section>
 				</section>
-				<div>
-					<label for="store-social-youtubelink">Youtube</label>
-					<input type="text" id="store-social-youtubelink" name="store-social-youtubelink" value="<?= $social->GetYoutubeLink(); ?>">
-				</div>
-				<div>
-					<label for="store-social-instagramlink">Instagram</label>
-					<input type="text" id="store-social-instagramlink" name="store-social-instagramlink" value="<?= $social->GetInstagramLink(); ?>">
-				</div>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-social-youtubelink">Youtube</label>
+						<input class="form__input-container__input" type="text" id="store-social-youtubelink" name="store-social-youtubelink" value="<?= $social->GetYoutubeLink(); ?>">
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-social-instagramlink">Instagram</label>
+						<input class="form__input-container__input" type="text" id="store-social-instagramlink" name="store-social-instagramlink" value="<?= $social->GetInstagramLink(); ?>">
+					</section>
+				</section>
 			</section>
 
 			<section>
 				<h2>Contact</h2>
 				<input type="hidden" id="store-contact-id" name="store-contact-id" value="<?= $contact->GetId(); ?>">
-				<div>
-					<label for="store-contact-email">Email</label>
-					<input type="text" id="store-contact-email" name="store-contact-email" value="<?= $contact->GetEmail(); ?>">
-				</div>
-				<div>
-					<label for="store-contact-phonenumber">Numéro de téléphone</label>
-					<input type="text" id="store-contact-phonenumber" name="store-contact-phonenumber" value="<?= $contact->GetPhoneNumber(); ?>">
-				</div>
-				<div>
-					<label for="store-contact-messenger">Messenger</label>
-					<input type="text" id="store-contact-messenger" name="store-contact-messenger" value="<?= $contact->GetMessenger(); ?>">
-				</div>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-contact-email">Email</label>
+						<input class="form__input-container__input" type="text" id="store-contact-email" name="store-contact-email" value="<?= $contact->GetEmail(); ?>">
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-contact-phonenumber">Numéro de téléphone</label>
+						<input class="form__input-container__input" type="text" id="store-contact-phonenumber" name="store-contact-phonenumber" value="<?= $contact->GetPhoneNumber(); ?>">
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-contact-messenger">Messenger</label>
+						<input class="form__input-container__input" type="text" id="store-contact-messenger" name="store-contact-messenger" value="<?= $contact->GetMessenger(); ?>">
+					</section>
+				</section>
 			</section>
 
 			<section>
@@ -94,6 +104,7 @@ $schedule = $store->GetSchedule();
 				<table>
 <?php foreach ($schedule->GetDaySchedules() as $daySchedule): ?>
 					<tr>
+						<input type="hidden" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>" value="<?= $daySchedule->GetId(); ?>">
 						<td><?= $daySchedule->GetDay()->GetLabel(); ?></td>
 						<td>:</td>
 						<td id="dayschedulesections-container-<?= $daySchedule->GetDay()->GetId(); ?>">

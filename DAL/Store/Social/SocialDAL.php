@@ -53,7 +53,7 @@ class SocialDAL
                 , TwitterLink = :TwitterLink
                 , YoutubeLink = :YoutubeLink
                 , InstagramLink = :InstagramLink
-                WHERE Id = :Id;"
+                WHERE Id = :Id;";
 
         foreach ($socials as $social)
         {

@@ -29,7 +29,7 @@ class DayScheduleDAL
         $dayDAL = new DayDAL($this->db);
         $days = $dayDAL->LoadAll();
 
-        $query = "SELECT DS.Id, DS.ScheduleId, DS.DayId, DS.ScheduleId FROM DaySchedule AS DS WHERE ";
+        $query = "SELECT DS.Id, DS.ScheduleId, DS.DayId FROM DaySchedule AS DS WHERE ";
         $params = array();
         $query .= DALHelper::SetArrayParams($scheduleIds, "DS", "ScheduleId", $params);
         $query .= ";";
@@ -82,13 +82,15 @@ class DayScheduleDAL
         {
             $dayScheduleIds[] = $daySchedule->GetId();
 
-            foreach ($daysSchedule->GetSections() as $section)
+            foreach ($daySchedule->GetSections() as $section)
                 $dayScheduleSections[] = $section;
         }
 
         $dayScheduleSectionDAL = new DayScheduleSectionDAL($this->db);
 
-        $dayScheduleSectionDAL->DeleteFromDayScheduleIds($dayScheduleIds);
-        $dayScheduleSectionDAL->Add($dayScheduleSections);
+        if (count($dayScheduleIds) > 0)
+            $dayScheduleSectionDAL->DeleteFromDayScheduleIds($dayScheduleIds);
+        if (count($dayScheduleSections) > 0)
+            $dayScheduleSectionDAL->Add($dayScheduleSections);
     }
 }

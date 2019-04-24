@@ -34,4 +34,9 @@ class Schedule
     {
         $this->daySchedules = $daySchedules;
     }
+
+    public function AddDaySchedule($key, $value)
+    {
+        $this->daySchedules[$key] = $value;
+    }
 }

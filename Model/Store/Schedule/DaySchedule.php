@@ -60,6 +60,11 @@ class DaySchedule
         $this->sections = $sections;
     }
 
+    public function AddSection($key, $value)
+    {
+        $this->sections[$key] = $value;
+    }
+
     public function IsOpen()
     {
         return count($this->sections) > 0;

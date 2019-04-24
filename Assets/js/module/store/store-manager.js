@@ -27,7 +27,7 @@ $(document).ready(function()
         }
 
         var startingTimeInput = "store-schedule-dayschedule-id:" + dayScheduleId + "-dayid:" + dayId + "-dayschedulesection-id:" + maxDayScheduleSectionId + "-startingtime";
-        var endingTimeInput = "store-schedule-dayschedule-id:" + dayScheduleId + "-dayid:" + dayId + "-dayschedulesection-id:" + maxDayScheduleSectionId + "-startingtime";
+        var endingTimeInput = "store-schedule-dayschedule-id:" + dayScheduleId + "-dayid:" + dayId + "-dayschedulesection-id:" + maxDayScheduleSectionId + "-endingtime";
         var html = "<section id=\"dayschedulesection-" + dayId + "-" + maxDayScheduleSectionId + "\">";
         html += "<input type=\"text\" id=\"" + startingTimeInput + "\" name=\"" + startingTimeInput + "\">";
         html += "-";
@@ -53,7 +53,7 @@ $(document).ready(function()
 
         var dayId = $(elt).attr("data-dayid")
         var dayScheduleSectionId = $(elt).attr("data-dayschedulesectionid");
-
-        $("#dayschedulesection-dayid:" + dayId + "-dayschedulesectionid:" + dayScheduleSectionId).fadeOut(600, function() { $(this).remove(); });
+        
+        $("#dayschedulesection-dayid\\:" + dayId + "-dayschedulesectionid\\:" + dayScheduleSectionId).fadeOut(600, function() { $(this).remove(); });
     }
 });

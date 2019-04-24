@@ -63,7 +63,10 @@ class ScheduleDAL
 
         foreach ($schedules as $schedule)
         {
-            $daySchedules[]
+            foreach ($schedule->GetDaySchedules() as $daySchedule)
+                $daySchedules[] = $daySchedule;
         }
+
+        $dayScheduleDAL->Update($daySchedules);
     }
 }
