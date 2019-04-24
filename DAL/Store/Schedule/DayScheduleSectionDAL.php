@@ -23,7 +23,7 @@ class DayScheduleSectionDAL
 
     public function LoadByDayScheduleIds($dayScheduleIds)
     {
-        $query = "SELECT DSS.Id, DSS.DayScheduleId, DSS.StartingTime, DSS.EndingTime FROM DayScheduleSection AS DSS WHERE ";
+        $query = "SELECT DSS.Id, DSS.DayScheduleId, DSS.DayScheduleId, DSS.StartingTime, DSS.EndingTime FROM DayScheduleSection AS DSS WHERE ";
         $params = array();
         $query .= DALHelper::SetArrayParams($dayScheduleIds, "DSS", "DayScheduleId", $params);
         $query .= ";";
@@ -35,11 +35,12 @@ class DayScheduleSectionDAL
         foreach ($rows as $row)
         {
             $dayScheduleSection = new DayScheduleSection();
-			$dayScheduleSection->SetId($row['Id']);
-			$dayScheduleSection->SetStartingTime(new \DateTime($row['StartingTime']));
-			$dayScheduleSection->SetEndingTime(new \DateTime($row['EndingTime']));
+            $dayScheduleSection->SetId($row["Id"]);
+            $dayScheduleSection->SetDayScheduleId($row["DayScheduleId"]);
+			$dayScheduleSection->SetStartingTime(new \DateTime($row["StartingTime"]));
+			$dayScheduleSection->SetEndingTime(new \DateTime($row["EndingTime"]));
 
-            $dayScheduleId = $row['DayScheduleId'];
+            $dayScheduleId = $row["DayScheduleId"];
 
             if (!array_key_exists($dayScheduleId, $dayScheduleSections))
                 $dayScheduleSections[$dayScheduleId] = array();
@@ -48,5 +49,31 @@ class DayScheduleSectionDAL
         }
 
         return $dayScheduleSections;
+    }
+
+    public function DeleteFromDayScheduleIds($dayScheduleIds)
+    {
+        $query = "DELETE FROM DayScheduleSection AS DSS WHERE ";
+        $params = array();
+        $query .= DALHelper::SetArrayParams($dayScheduleIds, "DSS", "DayScheduleId", $params);
+        $query .= ";";
+
+        $this->db->Execute($query, $params);
+    }
+
+    public function Add($dayScheduleSections)
+    {
+        $qery = "INSERT INTO DayScheduleSection (DayScheduleId, StartingTime, EndingTime)
+            VALUES (:DayScheduleId, :StartingTime, :EndingTime);";
+
+        foreach ($dayScheduleSections as $dayScheduleSection)
+        {
+            $params = [];
+            $params["DayScheduleId"] = $dayScheduleSection->GetDayScheduleId();
+            $params["StartingTime"] = $dayScheduleSection->GetStartingTime();
+            $params["EndingTime"] = $dayScheduleSection->GetEndingTime();
+
+            $this->db->Execute($query, $params);
+        }
     }
 }

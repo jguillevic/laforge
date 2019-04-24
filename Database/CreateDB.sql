@@ -188,7 +188,7 @@ VALUES (1, 1)
 , (2, 3)
 , (3, 6);
 
-INSERT INTO User (1, Username, Salt, Password, Email, RoleId)
+INSERT INTO User (Id, Username, Salt, Password, Email, RoleId)
 VALUES (1, 'admin', '', '', 'admin@gmail.com', 1);
 
 INSERT INTO ExtendedProperty (Name, Value)
@@ -214,18 +214,6 @@ VALUES (1, 1, 1)
 , (5, 1, 5)
 , (6, 1, 6)
 , (7, 1, 7);
-
-INSERT INTO DayScheduleSection (Id, DayScheduleId, StartingTime, EndingTime)
-VALUES (1, 2, '10:00', '12:00')
-, (2, 2, '13:00', '19:00')
-, (3, 3, '10:00', '12:00')
-, (4, 3, '13:00', '19:00')
-, (5, 4, '10:00', '12:00')
-, (6, 4, '13:00', '19:00')
-, (7, 5, '10:00', '12:00')
-, (8, 5, '13:00', '19:00')
-, (9, 6, '9:00', '12:00')
-, (10, 6, '13:00', '19:00');
 
 INSERT INTO Social (Id, FacebookLink, TwitterLink, YoutubeLink, InstagramLink)
 VALUES (1, 'www.facebook.com/La-Forge-dAudren-164158920348705', 'www.twitter.com/LaForgedAudren', 'www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ', 'www.instagram.com/renaudlepage/');

@@ -8,6 +8,7 @@ namespace Model\Store\Schedule;
 class DayScheduleSection
 {
     private $id;
+    private $dayScheduleId;
     private $startingTime;
     private $endingTime;
 
@@ -19,6 +20,16 @@ class DayScheduleSection
     public function SetId($id)
     {
         $this->id = $id;
+    }
+
+    public function GetDayScheduleId()
+    {
+        return $this->dayScheduleId;
+    }
+
+    public function SetDayScheduleId($dayScheduleId)
+    {
+        $this->dayScheduleId = $dayScheduleId;
     }
 
     public function GetStartingTime()

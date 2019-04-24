@@ -20,4 +20,9 @@ class StoreBLL
     {
         return $this->storeDAL->LoadAll();
     }
+
+    public function Update($stores)
+    {
+        $this->storeDAL->Update($stores);
+    }
 }

@@ -2,17 +2,21 @@
 
 namespace Model\Store\Schedule;
 
+use \Model\Day\Day;
+
 /**
  * @author JGuillevic
  */
 class DaySchedule
 {
     private $id;
+    private $scheduleId;
     private $day;
     private $sections;
 
     public function __construct()
     {
+        $this->day = new Day();
         $this->sections = array();
     }
 
@@ -24,6 +28,16 @@ class DaySchedule
     public function SetId($id)
     {
         $this->id = $id;
+    }
+
+    public function GetScheduleId()
+    {
+        return $this->scheduleId;
+    }
+
+    public function SetScheduleId($scheduleId)
+    {
+        $this->scheduleId = $scheduleId;
     }
 
     public function GetDay()

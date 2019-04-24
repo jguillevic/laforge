@@ -5,6 +5,7 @@ namespace DAL\Store\Schedule;
 use \Framework\DAL\Database;
 use \Framework\DAL\DALHelper;
 use \Model\Store\Schedule\DaySchedule;
+use \DAL\Store\Schedule\DayScheduleSectionDAL;
 use \DAL\Day\DayDAL;
 
 /**
@@ -28,7 +29,7 @@ class DayScheduleDAL
         $dayDAL = new DayDAL($this->db);
         $days = $dayDAL->LoadAll();
 
-        $query = "SELECT DS.Id, DS.DayId, DS.ScheduleId FROM DaySchedule AS DS WHERE ";
+        $query = "SELECT DS.Id, DS.ScheduleId, DS.DayId, DS.ScheduleId FROM DaySchedule AS DS WHERE ";
         $params = array();
         $query .= DALHelper::SetArrayParams($scheduleIds, "DS", "ScheduleId", $params);
         $query .= ";";
@@ -41,9 +42,10 @@ class DayScheduleDAL
         foreach ($rows as $row)
         {
             $daySchedule = new DaySchedule();
-			$daySchedule->SetId($row['Id']);
-            $daySchedule->SetDay($days[$row['DayId']]);
-            $scheduleId = $row['ScheduleId'];
+            $daySchedule->SetId($row["Id"]);
+            $daySchedule->SetScheduleId($row["ScheduleId"]);
+            $daySchedule->SetDay($days[$row["DayId"]]);
+            $scheduleId = $row["ScheduleId"];
             $dayScheduleIds[$daySchedule->GetId()] = $daySchedule->GetId();
 
             if (!array_key_exists($scheduleId, $daySchedulesByScheduleIds))
@@ -69,5 +71,24 @@ class DayScheduleDAL
         }
 
         return $daySchedulesByScheduleIds;
+    }
+
+    public function Update($daySchedules)
+    {
+        $dayScheduleIds = [];
+        $dayScheduleSections = [];
+
+        foreach ($daySchedules as $daySchedule)
+        {
+            $dayScheduleIds[] = $daySchedule->GetId();
+
+            foreach ($daysSchedule->GetSections() as $section)
+                $dayScheduleSections[] = $section;
+        }
+
+        $dayScheduleSectionDAL = new DayScheduleSectionDAL($this->db);
+
+        $dayScheduleSectionDAL->DeleteFromDayScheduleIds($dayScheduleIds);
+        $dayScheduleSectionDAL->Add($dayScheduleSections);
     }
 }

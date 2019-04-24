@@ -2,6 +2,11 @@
 
 namespace Model\Store;
 
+use \Model\Store\Address\Address;
+use \Model\Store\Social\Social;
+use \Model\Store\Contact\Contact;
+use \Model\Store\Schedule\Schedule;
+
 class Store
 {
     private $id;
@@ -9,6 +14,14 @@ class Store
     private $social;
     private $contact;
     private $schedule;
+
+    public function __construct()
+    {
+        $address = new Address();
+        $social = new Social();
+        $contact = new Contact();
+        $schedule = new Schedule();
+    }
 
     public function GetId()
     {

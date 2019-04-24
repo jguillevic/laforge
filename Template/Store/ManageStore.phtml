@@ -19,30 +19,32 @@ $schedule = $store->GetSchedule();
 		<section>
 			<section class="form__content">
 				<h2>Social</h2>
+				<input type="hidden" id="store-social-id" name="store-social-id" value="<?= $social->GetId(); ?>">
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-social-facebooklink">Facebook</label>
-						<input class="form__input-container__input" type="text" id="store-contact-facebooklink" name="store-contact-facebooklink" value="<?= $social->GetFacebookLink(); ?>">
+						<input class="form__input-container__input" type="text" id="store-social-facebooklink" name="store-social-facebooklink" value="<?= $social->GetFacebookLink(); ?>">
 					</section>
 				</section>
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-social-twitterlink">Twitter</label>
-						<input class="form__input-container__input" type="text" id="store-contact-twitterlink" name="store-contact-twitterlink" value="<?= $social->GetTwitterLink(); ?>">
+						<input class="form__input-container__input" type="text" id="store-social-twitterlink" name="store-social-twitterlink" value="<?= $social->GetTwitterLink(); ?>">
 					</section>
 				</section>
 				<div>
 					<label for="store-social-youtubelink">Youtube</label>
-					<input type="text" id="store-contact-youtubelink" name="store-contact-youtubelink" value="<?= $social->GetYoutubeLink(); ?>">
+					<input type="text" id="store-social-youtubelink" name="store-social-youtubelink" value="<?= $social->GetYoutubeLink(); ?>">
 				</div>
 				<div>
 					<label for="store-social-instagramlink">Instagram</label>
-					<input type="text" id="store-contact-instagramlink" name="store-contact-instagramlink" value="<?= $social->GetInstagramLink(); ?>">
+					<input type="text" id="store-social-instagramlink" name="store-social-instagramlink" value="<?= $social->GetInstagramLink(); ?>">
 				</div>
 			</section>
 
 			<section>
 				<h2>Contact</h2>
+				<input type="hidden" id="store-contact-id" name="store-contact-id" value="<?= $contact->GetId(); ?>">
 				<div>
 					<label for="store-contact-email">Email</label>
 					<input type="text" id="store-contact-email" name="store-contact-email" value="<?= $contact->GetEmail(); ?>">
@@ -59,6 +61,7 @@ $schedule = $store->GetSchedule();
 
 			<section>
 				<h2>Addresse</h2>
+				<input type="hidden" id="store-address-id" name="store-address-id" value="<?= $address->GetId(); ?>">
 				<div>
 					<label for="store-address-socialreason">Raison sociale</label>
 					<input type="text" id="store-address-socialreason" name="store-address-socialreason" value="<?= $address->GetSocialReason(); ?>">
@@ -87,27 +90,28 @@ $schedule = $store->GetSchedule();
 			
 			<section>
 				<h2>Horaires</h2>
-					<table>
+				<input type="hidden" id="store-schedule-id" name="store-schedule-id" value="<?= $schedule->GetId(); ?>">
+				<table>
 <?php foreach ($schedule->GetDaySchedules() as $daySchedule): ?>
-						<tr>
-							<td><?= $daySchedule->GetDay()->GetLabel();?></td>
-							<td>:</td>
-							<td id="dayschedulesections-container-<?= $daySchedule->GetDay()->GetId(); ?>">
+					<tr>
+						<td><?= $daySchedule->GetDay()->GetLabel(); ?></td>
+						<td>:</td>
+						<td id="dayschedulesections-container-<?= $daySchedule->GetDay()->GetId(); ?>">
 	<?php foreach ($daySchedule->GetSections() as $section): ?>
-								<section id="dayschedulesection-<?= $daySchedule->GetDay()->GetId(); ?>-<?= $section->GetId(); ?>">
-									<input type="text" id="store-schedule-<?= $daySchedule->GetDay()->GetId(); ?>-startingtime-<?= $section->GetId(); ?>" name="store-schedule-<?= $daySchedule->GetDay()->GetId(); ?>-startingtime-<?= $section->GetId(); ?>" value="<?= $section->GetStartingTime()->format('H:i') ?>"><!--
-									-->-<!--
-									--><input type="text" id="store-schedule-<?= $daySchedule->GetDay()->GetId(); ?>-endingtime-<?= $section->GetId(); ?>" name="store-schedule-<?= $daySchedule->GetDay()->GetId(); ?>-endingtime-<?= $section->GetId(); ?>" value="<?= $section->GetEndingTime()->format('H:i') ?>"><!--
-									--><button class="delete-dayschedulesection-button" data-dayid="<?= $daySchedule->GetDay()->GetId(); ?>" data-dayschedulesectionid="<?= $section->GetId(); ?>">x</button>
-								</section>
+							<section id="dayschedulesection-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesectionid:<?= $section->GetId(); ?>">
+								<input type="text" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-startingtime" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-startingtime" value="<?= $section->GetStartingTime()->format('H:i') ?>"><!--
+								-->-<!--
+								--><input type="text" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-endingtime" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-endingtime" value="<?= $section->GetEndingTime()->format('H:i') ?>"><!--
+								--><button class="delete-dayschedulesection-button" data-dayid="<?= $daySchedule->GetDay()->GetId(); ?>" data-dayschedulesectionid="<?= $section->GetId(); ?>">x</button>
+							</section>
 	<?php endforeach; ?>
-							</td>
-							<td>
-								<button class="add-dayschedulesection-button" data-dayid="<?= $daySchedule->GetDay()->GetId(); ?>">+</button>
-							</td>
-						</tr>
+						</td>
+						<td>
+							<button class="add-dayschedulesection-button" data-dayid="<?= $daySchedule->GetDay()->GetId(); ?>" data-dayscheduleid="<?= $daySchedule->GetId(); ?>">+</button>
+						</td>
+					</tr>
 <?php endforeach; ?>
-					</table>
+				</table>
 			</section>
 
 			<section class="form__buttons">

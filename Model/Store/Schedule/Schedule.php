@@ -12,7 +12,7 @@ class Schedule
 
     public function __construct()
     {
-        $this->scheduleDays = array();
+        $this->daySchedules = [];
     }
 
     public function GetId()

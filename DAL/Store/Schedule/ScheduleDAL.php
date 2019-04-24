@@ -7,6 +7,7 @@ use \Framework\DAL\DALHelper;
 use \Model\Store\Schedule\Schedule;
 use \Model\Store\Schedule\DaySchedule;
 use \Model\Store\Schedule\ScheduleSection;
+use \DAL\Store\Schedule\DayScheduleDAL;
 
 /**
  * @author JGuillevic
@@ -52,5 +53,17 @@ class ScheduleDAL
             $schedule->SetDaySchedules($daySchedules[$schedule->GetId()]);
 
         return $schedules;
+    }
+
+    public function Update($schedules)
+    {
+        $dayScheduleDAL = new DayScheduleDAL($this->db);
+
+        $daySchedules = [];
+
+        foreach ($schedules as $schedule)
+        {
+            $daySchedules[]
+        }
     }
 }

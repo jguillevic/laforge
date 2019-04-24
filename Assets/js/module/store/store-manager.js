@@ -5,6 +5,7 @@ $(document).ready(function()
         event.preventDefault();
 
         var dayId = $(this).attr("data-dayid");
+        var dayScheduleId = $(this).attr("data-dayscheduleid");
 
         var sections = $("[id^=dayschedulesection-" + dayId + "]");
 
@@ -25,10 +26,12 @@ $(document).ready(function()
             });
         }
 
+        var startingTimeInput = "store-schedule-dayschedule-id:" + dayScheduleId + "-dayid:" + dayId + "-dayschedulesection-id:" + maxDayScheduleSectionId + "-startingtime";
+        var endingTimeInput = "store-schedule-dayschedule-id:" + dayScheduleId + "-dayid:" + dayId + "-dayschedulesection-id:" + maxDayScheduleSectionId + "-startingtime";
         var html = "<section id=\"dayschedulesection-" + dayId + "-" + maxDayScheduleSectionId + "\">";
-        html += "<input type=\"text\" id=\"store-schedule-" + dayId + "-startingtime-" + maxDayScheduleSectionId + "\" name=\"store-schedule-" + dayId + "-startingtime-" + maxDayScheduleSectionId + "\">";
+        html += "<input type=\"text\" id=\"" + startingTimeInput + "\" name=\"" + startingTimeInput + "\">";
         html += "-";
-        html += "<input type=\"text\" id=\"store-schedule-" + dayId + "-endingtime-" + maxDayScheduleSectionId + "\" name=\"store-schedule-" + dayId + "-endingtime-" + maxDayScheduleSectionId + "\">";
+        html += "<input type=\"text\" id=\"" + endingTimeInput + "\" name=\"" + endingTimeInput + "\">";
         html += "<button class=\"delete-dayschedulesection-button\" data-dayid=\"" + dayId + "\" data-dayschedulesectionid=\"" + maxDayScheduleSectionId + "\">x</button>";
         html += "</section>";
         sectionsContainer.append(html);
@@ -51,6 +54,6 @@ $(document).ready(function()
         var dayId = $(elt).attr("data-dayid")
         var dayScheduleSectionId = $(elt).attr("data-dayschedulesectionid");
 
-        $("#dayschedulesection-" + dayId + "-" + dayScheduleSectionId).fadeOut(600, function() { $(this).remove(); });
+        $("#dayschedulesection-dayid:" + dayId + "-dayschedulesectionid:" + dayScheduleSectionId).fadeOut(600, function() { $(this).remove(); });
     }
 });
