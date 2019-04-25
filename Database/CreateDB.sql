@@ -4,6 +4,8 @@ CREATE DATABASE laforge;
 
 USE laforge;
 
+
+/* Gestion droits. */
 CREATE TABLE RightDesc
 (
 	Id INT NOT NULL AUTO_INCREMENT
@@ -28,6 +30,8 @@ CREATE TABLE Role_RightDesc
 	, FOREIGN KEY (RightDescId) REFERENCES RightDesc(Id)
 );
 
+
+/* Gestion utilisateurs. */
 CREATE TABLE User
 (
 	Id INT NOT NULL AUTO_INCREMENT
@@ -40,6 +44,28 @@ CREATE TABLE User
 	, FOREIGN KEY (RoleId) REFERENCES Role(Id)
 );
 
+
+/* Gestion historiques. */
+CREATE TABLE Creation
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Date DATETIME NOT NULL
+	, UserId
+	, PRIMARY KEY (Id)
+	, FOREIGN KEY (UserId) REFERENCES User(Id)
+);
+
+CREATE TABLE Change
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Date DATETIME NOT NULL
+	, UserId INT NOT NULL
+	, PRIMARY KEY (Id)
+	, FOREIGN KEY (UserId) REFERENCES User(Id)
+);
+
+
+/* Gestion événements. */
 CREATE TABLE Game
 (
 	Id INT NOT NULL AUTO_INCREMENT
@@ -57,26 +83,40 @@ CREATE TABLE EventCategory
 CREATE TABLE Event
 (
 	Id INT NOT NULL AUTO_INCREMENT
-	, Title NVARCHAR(200)
+	, Name NVARCHAR(200)
+	, Description NTEXT
 	, GameId INT NOT NULL
 	, EventCategoryId INT NOT NULL
 	, Date DATE NOT NULL
 	, StartingTime TIME NOT NULL
 	, EndingTime TIME NOT NULL
+	, CreationId INT NOT NULL
 	, PRIMARY KEY (Id)
 	, FOREIGN KEY (GameId) REFERENCES Game(Id)
 	, FOREIGN KEY (EventCategoryId) REFERENCES EventCategory(Id)
+	, FOREIGN KEY (CreationId) REFERENCES Creation(Id)
 );
 
-CREATE TABLE Category
+CREATE TABLE Event_User
 (
-	Id INT NOT NULL AUTO_INCREMENT
-	, Name NVARCHAR(200) NOT NULL
-	, Color BINARY(3) NOT NULL
-	, IsVisible BOOLEAN NOT NULL
-	, PRIMARY KEY (Id)
+	EventId INT NOT NULL
+	, UserId INT NOT NULL
+	, PRIMARY KEY (EventId, UserId)
+	, FOREIGN KEY (EventId) REFERENCES Event(Id)
+	, FOREIGN KEY (UserId) REFERENCES User(Id)
 );
 
+CREATE TABLE Event_Change
+(
+	EventId INT NOT NULL
+	, ChangeId INT NOT NULL
+	, PRIMARY KEY (EventId, ChangeId)
+	, FOREIGN KEY (EventId) REFERENCES Event(Id)
+	, FOREIGN KEY (ChangeId) REFERENCES Change(Id)
+)
+
+
+/* Gestion images. */
 CREATE TABLE Image
 (
 	Id INT NOT NULL AUTO_INCREMENT
@@ -87,31 +127,46 @@ CREATE TABLE Image
 	, PRIMARY KEY (Id)
 );
 
+
+/* Gestion articles. */
+/* TODO : Renommer en PostCategory. */
+CREATE TABLE Category
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Name NVARCHAR(200) NOT NULL
+	, Color BINARY(3) NOT NULL
+	, IsVisible BOOLEAN NOT NULL
+	, PRIMARY KEY (Id)
+);
+
 CREATE TABLE Post
 (
 	Id INT NOT NULL AUTO_INCREMENT
-	, Title NVARCHAR(100) NOT NULL
-	, Slug NVARCHAR(100) NOT NULL
-	, Description NVARCHAR(255) NOT NULL
-	, Content TEXT NOT NULL
-	, CreationDate DATETIME NOT NULL
-	, LastUpdateDate DATETIME NOT NULL
+	, Title NVARCHAR(200) NOT NULL
+	, Slug NVARCHAR(200) NOT NULL
+	, Description NTEXT NOT NULL
+	, Content NTEXT NOT NULL
 	, IsPublished BOOLEAN NOT NULL
 	, CategoryId INT NOT NULL
 	, ImageId INT NOT NULL
+	, CreationId INT NOT NULL
 	, PRIMARY KEY (Id)
 	, FOREIGN KEY (CategoryId) REFERENCES Category(Id)
 	, FOREIGN KEY (ImageId) REFERENCES Image(Id)
+	, FOREIGN KEY (CreationId) REFERENCES Creation(Id)
 );
 
-CREATE TABLE ExtendedProperty
+CREATE TABLE Post_Change
 (
-	Id INT NOT NULL AUTO_INCREMENT
-	, Name NVARCHAR(50) NOT NULL
-	, Value NVARCHAR(255) NOT NULL
-	, PRIMARY KEY (Id)
+	PostId INT NOT NULL
+	, ChangeId INT NOT NULL
+	, PRIMARY KEY (PostId, ChangeId)
+	, FOREIGN KEY (PostId) REFERENCES Post(Id)
+	, FOREIGN KEY (ChangeId) REFERENCES Change(Id)
 );
 
+
+/* Gestion des magasins. */
 CREATE TABLE Day
 (
 	Id INT NOT NULL AUTO_INCREMENT
@@ -190,6 +245,17 @@ CREATE TABLE Store
 	, FOREIGN KEY (ContactId) REFERENCES Contact(Id)
 	, FOREIGN KEY (ScheduleId) REFERENCES Schedule(Id)
 );
+
+
+CREATE TABLE ExtendedProperty
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Name NVARCHAR(50) NOT NULL
+	, Value NVARCHAR(255) NOT NULL
+	, PRIMARY KEY (Id)
+);
+
+
 
 
 
