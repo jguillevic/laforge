@@ -4,7 +4,7 @@ CREATE DATABASE laforge;
 
 USE laforge;
 
-CREATE TABLE Right
+CREATE TABLE RightDesc
 (
 	Id INT NOT NULL AUTO_INCREMENT
 	, Code NVARCHAR(10) NOT NULL
@@ -19,13 +19,13 @@ CREATE TABLE Role
 	, PRIMARY KEY (Id)
 );
 
-CREATE TABLE Role_Right
+CREATE TABLE Role_RightDesc
 (
 	RoleId INT NOT NULL
-	, RightId INT NOT NULL
-	, PRIMARY KEY (RoleId, RightId)
+	, RightDescId INT NOT NULL
+	, PRIMARY KEY (RoleId, RightDescId)
 	, FOREIGN KEY (RoleId) REFERENCES Role(Id)
-	, FOREIGN KEY (RightId) REFERENCES Right(Id)
+	, FOREIGN KEY (RightDescId) REFERENCES RightDesc(Id)
 );
 
 CREATE TABLE User
@@ -38,6 +38,34 @@ CREATE TABLE User
 	, RoleId INT NOT NULL
 	, PRIMARY KEY (Id)
 	, FOREIGN KEY (RoleId) REFERENCES Role(Id)
+);
+
+CREATE TABLE Game
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Name NVARCHAR(200) NOT NULL
+	, PRIMARY KEY (Id)
+);
+
+CREATE TABLE EventCategory
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Name NVARCHAR(200) NOT NULL
+	, PRIMARY KEY (Id)
+);
+
+CREATE TABLE Event
+(
+	Id INT NOT NULL AUTO_INCREMENT
+	, Title NVARCHAR(200)
+	, GameId INT NOT NULL
+	, EventCategoryId INT NOT NULL
+	, Date DATE NOT NULL
+	, StartingTime TIME NOT NULL
+	, EndingTime TIME NOT NULL
+	, PRIMARY KEY (Id)
+	, FOREIGN KEY (GameId) REFERENCES Game(Id)
+	, FOREIGN KEY (EventCategoryId) REFERENCES EventCategory(Id)
 );
 
 CREATE TABLE Category
@@ -131,7 +159,7 @@ CREATE TABLE Social
 CREATE TABLE Contact
 (
 	Id INT NOT NULL AUTO_INCREMENT
-	, Email NVARCHAR(500) NULL
+	, Email NVARCHAR(200) NULL
     , Messenger NVARCHAR(500) NULL
     , PhoneNumber NVARCHAR(20) NULL
 	, PRIMARY KEY (Id)
@@ -165,7 +193,7 @@ CREATE TABLE Store
 
 
 
-INSERT INTO Right (Id, Code, Label)
+INSERT INTO RightDesc (Id, Code, Label)
 VALUES (1, 'MAN_USER', 'Gérer les utilisateurs')
 , (2, 'MAN_POST', 'Gérer les articles')
 , (3, 'MAN_CAT', 'Gérer les catégories')
@@ -178,7 +206,7 @@ VALUES (1, 'Administrateur')
 , (2, 'Editeur')
 , (3, 'Spectateur');
 
-INSERT INTO Role_Right (RoleId, RightId)
+INSERT INTO Role_RightDesc (RoleId, RightDescId)
 VALUES (1, 1)
 , (1, 2)
 , (1, 3)
@@ -189,7 +217,7 @@ VALUES (1, 1)
 , (3, 6);
 
 INSERT INTO User (Id, Username, Salt, Password, Email, RoleId)
-VALUES (1, 'admin', '', '', 'admin@gmail.com', 1);
+VALUES (1, 'admin', '', 'veer37he', 'admin@gmail.com', 1);
 
 INSERT INTO ExtendedProperty (Name, Value)
 VALUES ('DBVersion', '1.00.000');

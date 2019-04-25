@@ -23,25 +23,25 @@ $schedule = $store->GetSchedule();
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-social-facebooklink">Facebook</label>
-						<input class="form__input-container__input" type="text" id="store-social-facebooklink" name="store-social-facebooklink" value="<?= $social->GetFacebookLink(); ?>">
+						<input class="form__input-container__input" type="url" id="store-social-facebooklink" name="store-social-facebooklink" value="<?= $social->GetFacebookLink(); ?>" required>
 					</section>
 				</section>
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-social-twitterlink">Twitter</label>
-						<input class="form__input-container__input" type="text" id="store-social-twitterlink" name="store-social-twitterlink" value="<?= $social->GetTwitterLink(); ?>">
+						<input class="form__input-container__input" type="url" id="store-social-twitterlink" name="store-social-twitterlink" value="<?= $social->GetTwitterLink(); ?>" maxlength="500" required>
 					</section>
 				</section>
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-social-youtubelink">Youtube</label>
-						<input class="form__input-container__input" type="text" id="store-social-youtubelink" name="store-social-youtubelink" value="<?= $social->GetYoutubeLink(); ?>">
+						<input class="form__input-container__input" type="url" id="store-social-youtubelink" name="store-social-youtubelink" value="<?= $social->GetYoutubeLink(); ?>" maxlength="500" required>
 					</section>
 				</section>
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-social-instagramlink">Instagram</label>
-						<input class="form__input-container__input" type="text" id="store-social-instagramlink" name="store-social-instagramlink" value="<?= $social->GetInstagramLink(); ?>">
+						<input class="form__input-container__input" type="url" id="store-social-instagramlink" name="store-social-instagramlink" value="<?= $social->GetInstagramLink(); ?>" maxlength="500" required>
 					</section>
 				</section>
 			</section>
@@ -52,19 +52,19 @@ $schedule = $store->GetSchedule();
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-contact-email">Email</label>
-						<input class="form__input-container__input" type="text" id="store-contact-email" name="store-contact-email" value="<?= $contact->GetEmail(); ?>">
+						<input class="form__input-container__input" type="email" id="store-contact-email" name="store-contact-email" value="<?= $contact->GetEmail(); ?>" maxlength="200" required>
 					</section>
 				</section>
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-contact-phonenumber">Numéro de téléphone</label>
-						<input class="form__input-container__input" type="text" id="store-contact-phonenumber" name="store-contact-phonenumber" value="<?= $contact->GetPhoneNumber(); ?>">
+						<input class="form__input-container__input" type="tel" id="store-contact-phonenumber" name="store-contact-phonenumber" value="<?= $contact->GetPhoneNumber(); ?>" maxlength="20" required>
 					</section>
 				</section>
 				<section class="form__validation-container">
 					<section class="form__input-container">
 						<label class="form__input-container__label" for="store-contact-messenger">Messenger</label>
-						<input class="form__input-container__input" type="text" id="store-contact-messenger" name="store-contact-messenger" value="<?= $contact->GetMessenger(); ?>">
+						<input class="form__input-container__input" type="url" id="store-contact-messenger" name="store-contact-messenger" value="<?= $contact->GetMessenger(); ?>" maxlength="500">
 					</section>
 				</section>
 			</section>
@@ -72,30 +72,42 @@ $schedule = $store->GetSchedule();
 			<section>
 				<h2>Addresse</h2>
 				<input type="hidden" id="store-address-id" name="store-address-id" value="<?= $address->GetId(); ?>">
-				<div>
-					<label for="store-address-socialreason">Raison sociale</label>
-					<input type="text" id="store-address-socialreason" name="store-address-socialreason" value="<?= $address->GetSocialReason(); ?>">
-				</div>
-				<div>
-					<label for="store-address-line1">Ligne 1</label>
-					<input type="text" id="store-address-line1" name="store-address-line1" value="<?= $address->GetLine1(); ?>">
-				</div>
-				<div>
-					<label for="store-address-line2">Ligne 2</label>
-					<input type="text" id="store-address-line2" name="store-address-line2" value="<?= $address->GetLine2(); ?>">
-				</div>
-				<div>
-					<label for="store-address-line3">Ligne 3</label>
-					<input type="text" id="store-address-line3" name="store-address-line3" value="<?= $address->GetLine3(); ?>">
-				</div>
-				<div>
-					<label for="store-address-postalcode">Code postal</label>
-					<input type="text" id="store-address-postalcode" name="store-address-postalcode" value="<?= $address->GetPostalCode(); ?>">
-				</div>
-				<div>
-					<label for="store-address-city">Ville</label>
-					<input type="text" id="store-address-city" name="store-address-city" value="<?= $address->GetCity(); ?>">
-				</div>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-address-socialreason">Raison sociale</label>
+						<input class="form__input-container__input" type="text" id="store-address-socialreason" name="store-address-socialreason" value="<?= $address->GetSocialReason(); ?>" maxlength="200" required>
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-address-line1">Ligne 1</label>
+						<input class="form__input-container__input" type="text" id="store-address-line1" name="store-address-line1" value="<?= $address->GetLine1(); ?>" maxlength="200" required>
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-address-line2">Ligne 2</label>
+						<input class="form__input-container__input" type="text" id="store-address-line2" name="store-address-line2" value="<?= $address->GetLine2(); ?>" maxlength="200">
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-address-line3">Ligne 3</label>
+						<input class="form__input-container__input" type="text" id="store-address-line3" name="store-address-line3" value="<?= $address->GetLine3(); ?>" maxlength="200">
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-address-postalcode">Code postal</label>
+						<input class="form__input-container__input" type="number" id="store-address-postalcode" name="store-address-postalcode" value="<?= $address->GetPostalCode(); ?>" maxlength="5" required>
+					</section>
+				</section>
+				<section class="form__validation-container">
+					<section class="form__input-container">
+						<label class="form__input-container__label" for="store-address-city">Ville</label>
+						<input class="form__input-container__input" type="text" id="store-address-city" name="store-address-city" value="<?= $address->GetCity(); ?>" maxlength="200" required>
+					</section>
+				</section>
 			</section>
 			
 			<section>
@@ -110,9 +122,9 @@ $schedule = $store->GetSchedule();
 						<td id="dayschedulesections-container-<?= $daySchedule->GetDay()->GetId(); ?>">
 	<?php foreach ($daySchedule->GetSections() as $section): ?>
 							<section id="dayschedulesection-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesectionid:<?= $section->GetId(); ?>">
-								<input type="text" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-startingtime" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-startingtime" value="<?= $section->GetStartingTime()->format('H:i') ?>"><!--
+								<input type="time" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-startingtime" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-startingtime" value="<?= $section->GetStartingTime()->format('H:i') ?>" required><!--
 								-->-<!--
-								--><input type="text" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-endingtime" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-endingtime" value="<?= $section->GetEndingTime()->format('H:i') ?>"><!--
+								--><input type="time" id="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-endingtime" name="store-schedule-dayschedule-id:<?= $daySchedule->GetId(); ?>-dayid:<?= $daySchedule->GetDay()->GetId(); ?>-dayschedulesection-id:<?= $section->GetId(); ?>-endingtime" value="<?= $section->GetEndingTime()->format('H:i') ?>" required><!--
 								--><button class="delete-dayschedulesection-button" data-dayid="<?= $daySchedule->GetDay()->GetId(); ?>" data-dayschedulesectionid="<?= $section->GetId(); ?>">x</button>
 							</section>
 	<?php endforeach; ?>
