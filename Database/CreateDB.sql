@@ -46,19 +46,10 @@ CREATE TABLE User
 
 
 /* Gestion historiques. */
-CREATE TABLE Creation
-(
-	Id INT NOT NULL AUTO_INCREMENT
-	, Date DATETIME NOT NULL
-	, UserId
-	, PRIMARY KEY (Id)
-	, FOREIGN KEY (UserId) REFERENCES User(Id)
-);
-
 CREATE TABLE Change
 (
 	Id INT NOT NULL AUTO_INCREMENT
-	, Date DATETIME NOT NULL
+	, DateTime DATETIME NOT NULL
 	, UserId INT NOT NULL
 	, PRIMARY KEY (Id)
 	, FOREIGN KEY (UserId) REFERENCES User(Id)
@@ -90,11 +81,9 @@ CREATE TABLE Event
 	, Date DATE NOT NULL
 	, StartingTime TIME NOT NULL
 	, EndingTime TIME NOT NULL
-	, CreationId INT NOT NULL
 	, PRIMARY KEY (Id)
 	, FOREIGN KEY (GameId) REFERENCES Game(Id)
 	, FOREIGN KEY (EventCategoryId) REFERENCES EventCategory(Id)
-	, FOREIGN KEY (CreationId) REFERENCES Creation(Id)
 );
 
 CREATE TABLE Event_User
@@ -149,11 +138,9 @@ CREATE TABLE Post
 	, IsPublished BOOLEAN NOT NULL
 	, CategoryId INT NOT NULL
 	, ImageId INT NOT NULL
-	, CreationId INT NOT NULL
 	, PRIMARY KEY (Id)
 	, FOREIGN KEY (CategoryId) REFERENCES Category(Id)
 	, FOREIGN KEY (ImageId) REFERENCES Image(Id)
-	, FOREIGN KEY (CreationId) REFERENCES Creation(Id)
 );
 
 CREATE TABLE Post_Change

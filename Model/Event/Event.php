@@ -4,7 +4,6 @@ namespace Model\Event;
 
 use \Model\Game\Game;
 use \Model\Event\EventCategory;
-use \Model\History\Creation;
 
 /**
  * @author JGuillevic
@@ -19,14 +18,12 @@ class Event
     private $date;
     private $startingTime;
     private $endingTime;
-    private $creation;
     private $changes;
 
     public function __construct()
     {
         $this->game = new Game();
         $this->eventCategory = new EventCategory();
-        $this->creation = new Creation();
         $this->changes = [];
     }
 
@@ -108,16 +105,6 @@ class Event
     public function SetEndingTime($endingTime)
     {
         $this->endingTime = $endingTime;
-    }
-
-    public function GetCreation()
-    {
-        return $this->creation;
-    }
-
-    public function SetCreation($creation)
-    {
-        $this->creation = $creation;
     }
 
     public function GetChanges()

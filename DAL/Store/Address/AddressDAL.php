@@ -24,12 +24,12 @@ class AddressDAL
     public function LoadByIds($ids)
     {
         $query = "SELECT A.Id, A.SocialReason, A.Line1, A.Line2, A.Line3, A.PostalCode, A.City FROM Address AS A WHERE ";
-        $params = array();
+        $params = [];
         $query .= DALHelper::SetArrayParams($ids, "A", "Id", $params);
         $query .= ";";
         $rows = $this->db->Read($query, $params);
 
-        $addresses = array();
+        $addresses = [];
 
         foreach ($rows as $row)
         {
