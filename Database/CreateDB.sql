@@ -6,7 +6,7 @@ USE laforge;
 
 
 /* Gestion droits. */
-CREATE TABLE RightDesc
+CREATE TABLE `Right`
 (
 	Id INT NOT NULL AUTO_INCREMENT
 	, Code NVARCHAR(10) NOT NULL
@@ -21,18 +21,18 @@ CREATE TABLE Role
 	, PRIMARY KEY (Id)
 );
 
-CREATE TABLE Role_RightDesc
+CREATE TABLE Role_Right
 (
 	RoleId INT NOT NULL
-	, RightDescId INT NOT NULL
-	, PRIMARY KEY (RoleId, RightDescId)
+	, RightId INT NOT NULL
+	, PRIMARY KEY (RoleId, RightId)
 	, FOREIGN KEY (RoleId) REFERENCES Role(Id)
-	, FOREIGN KEY (RightDescId) REFERENCES RightDesc(Id)
+	, FOREIGN KEY (RightId) REFERENCES `Right`(Id)
 );
 
 
 /* Gestion utilisateurs. */
-CREATE TABLE User
+CREATE TABLE `User`
 (
 	Id INT NOT NULL AUTO_INCREMENT
 	, Username NVARCHAR(200) NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE User
 
 
 /* Gestion historiques. */
-CREATE TABLE Change
+CREATE TABLE `Change`
 (
 	Id INT NOT NULL AUTO_INCREMENT
 	, DateTime DATETIME NOT NULL
@@ -71,11 +71,11 @@ CREATE TABLE EventCategory
 	, PRIMARY KEY (Id)
 );
 
-CREATE TABLE Event
+CREATE TABLE `Event`
 (
 	Id INT NOT NULL AUTO_INCREMENT
 	, Name NVARCHAR(200)
-	, Description NTEXT
+	, Description TEXT
 	, GameId INT NOT NULL
 	, EventCategoryId INT NOT NULL
 	, Date DATE NOT NULL
@@ -100,9 +100,9 @@ CREATE TABLE Event_Change
 	EventId INT NOT NULL
 	, ChangeId INT NOT NULL
 	, PRIMARY KEY (EventId, ChangeId)
-	, FOREIGN KEY (EventId) REFERENCES Event(Id)
-	, FOREIGN KEY (ChangeId) REFERENCES Change(Id)
-)
+	, FOREIGN KEY (EventId) REFERENCES `Event`(Id)
+	, FOREIGN KEY (ChangeId) REFERENCES `Change`(Id)
+);
 
 
 /* Gestion images. */
@@ -133,8 +133,8 @@ CREATE TABLE Post
 	Id INT NOT NULL AUTO_INCREMENT
 	, Title NVARCHAR(200) NOT NULL
 	, Slug NVARCHAR(200) NOT NULL
-	, Description NTEXT NOT NULL
-	, Content NTEXT NOT NULL
+	, Description TEXT NOT NULL
+	, Content TEXT NOT NULL
 	, IsPublished BOOLEAN NOT NULL
 	, CategoryId INT NOT NULL
 	, ImageId INT NOT NULL
@@ -149,7 +149,7 @@ CREATE TABLE Post_Change
 	, ChangeId INT NOT NULL
 	, PRIMARY KEY (PostId, ChangeId)
 	, FOREIGN KEY (PostId) REFERENCES Post(Id)
-	, FOREIGN KEY (ChangeId) REFERENCES Change(Id)
+	, FOREIGN KEY (ChangeId) REFERENCES `Change`(Id)
 );
 
 
@@ -246,7 +246,7 @@ CREATE TABLE ExtendedProperty
 
 
 
-INSERT INTO RightDesc (Id, Code, Label)
+INSERT INTO `Right` (Id, Code, Label)
 VALUES (1, 'MAN_USER', 'Gérer les utilisateurs')
 , (2, 'MAN_POST', 'Gérer les articles')
 , (3, 'MAN_CAT', 'Gérer les catégories')
@@ -259,7 +259,7 @@ VALUES (1, 'Administrateur')
 , (2, 'Editeur')
 , (3, 'Spectateur');
 
-INSERT INTO Role_RightDesc (RoleId, RightDescId)
+INSERT INTO Role_Right (RoleId, RightId)
 VALUES (1, 1)
 , (1, 2)
 , (1, 3)
@@ -307,3 +307,11 @@ VALUES (1, 'La Forge d''Audren', '6 rue Vincent de Beauvais', 60000, 'BEAUVAIS')
 
 INSERT INTO Store (Id, AddressId, ContactId, SocialId, ScheduleId)
 VALUES (1, 1, 1, 1, 1);
+
+
+INSERT INTO Game (Name)
+VALUES ('Magic : The Gathering')
+, ('FFTCG')
+, ('Warhammer')
+, ('Warhammer 40K')
+, ('Jeu de société');

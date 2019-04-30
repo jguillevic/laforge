@@ -1,0 +1,100 @@
+.home
+{
+    width: 100%;
+
+    &__container
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &:first-child
+        {
+            margin-bottom: 2%;
+        }
+    }
+
+    &__event
+    {
+        display: block;
+        width: 78%;
+        background-color: purple;
+        overflow-wrap: break-word;
+    }
+
+    &__social
+    {
+        width: 20%;
+        display: grid;
+        grid-gap: 0.5em;
+        padding: 0.5em;
+        background-color: $secondary-light;
+        overflow-wrap: break-word;
+        color: $main-light;
+        text-align: center;
+
+        &__button
+        {
+            font-size: 3em;
+            display: block;
+            height: 1.5em;
+            width: 100%;
+            transition: background-color 0.3s;
+
+            &:hover
+            {
+                background-color: $main-color;
+                cursor: pointer;
+            }
+        }
+
+        &__button--facebook
+        {
+            @extend .home__social__button;
+
+            grid-row: 1;
+            grid-column: 1;
+            background-color: $facebook-color;
+        }
+
+        &__button--twitter
+        {
+            @extend .home__social__button;
+
+            grid-row: 1;
+            grid-column: 2;
+            background-color: $twitter-color;
+        }
+
+        &__button--instagram
+        {
+            grid-row: 2;
+            grid-column: 1;
+        }
+
+        &__button--youtube
+        {
+            grid-row: 2;
+            grid-column: 2;
+        }
+    }
+
+    &__instagram
+    {
+        width: 20%;
+        display: block;
+        background-color: aqua;
+        overflow-wrap: break-word;
+    }
+
+    &__blog
+    {
+        display: block;
+        width: 78%;
+        background-color: red;
+        overflow-wrap: break-word;
+    }
+
+    
+}

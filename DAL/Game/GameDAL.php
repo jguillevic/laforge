@@ -43,4 +43,25 @@ class GameDAL
 
         return $games;
     }
+
+    public function LoadAll()
+    {
+        $query = "SELECT G.Id, G.Name FROM Game AS G;";
+
+        $rows = $this->db->Read($query);
+
+        $games = [];
+
+        foreach ($rows as $row)
+        {
+            $game = new Game();
+
+            $game->SetId($row["Id"]);
+            $game->SetName($row["Name"]);
+
+            $games[$game->GetId()] = $game;
+        }
+
+        return $games;
+    }
 }

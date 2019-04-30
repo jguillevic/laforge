@@ -101,4 +101,22 @@
 		, "Action":"Update"
 		, "Name":"UpdateStore"
 	}
+	, {
+		"Path":"/game/manage"
+		, "Controller":"Game\\GameController"
+		, "Action":"Manage"
+		, "Name":"ManageGame"
+	}
+	, {
+		"Path":"/game/add"
+		, "Controller":"Game\\GameController"
+		, "Action":"Add"
+		, "Name":"AddGame"
+	}
+	, {
+		"Path":"/game/update"
+		, "Controller":"Game\\GameController"
+		, "Action":"Update"
+		, "Name":"UpdateGame"
+	}
 ]

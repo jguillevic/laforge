@@ -15,6 +15,7 @@ class UserHelper
 	{
 		return isset($_SESSION[self::USER_KEY]);
 	}
+
 	private static function GetUser()
 	{
 		$user = null;
@@ -28,6 +29,30 @@ class UserHelper
 	}
 
 	public static function CanManageStore()
+	{
+		$user = self::GetUser();
+
+		if ($user != null)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public static function CanManageGame()
+	{
+		$user = self::GetUser();
+
+		if ($user != null)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public static function CanManageEvent()
 	{
 		$user = self::GetUser();
 

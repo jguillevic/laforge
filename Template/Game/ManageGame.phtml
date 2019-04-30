@@ -1,0 +1,41 @@
+<?php
+use \Framework\Tools\Helper\RoutesHelper;
+?>
+
+<section class="l-content content">
+	<section class="manager">
+		<h1>Gérer les jeux</h1>
+		<section class="manager__actions">
+            <ul>
+                <li>
+                    <a class="button" href="<?= RoutesHelper::Path("AddGame"); ?>"><i class="fas fa-plus"></i> Ajouter</a>
+                </li>
+            </ul>
+		</section>
+		<table>
+			<tr>
+    		   	<th scope="col">#</th>
+    		   	<th scope="col">Nom</th>
+    		   	<th scope="col">Actions</th>
+    		</tr>
+<?php 
+if (isset($params) && array_key_exists("games", $params))
+{
+    $games = $params["games"];
+    foreach ($games as $game) 
+    {
+?>
+            <tr id="<?= "game-".$game->GetId(); ?>">
+                <td><?= $game->GetId(); ?></td>
+				<td><?= $game->GetName(); ?></td>
+                <td>
+                    <a class="button" href="<?= RoutesHelper::Path("UpdateGame", [ "id" => $game->GetId() ]); ?>"><i class="fas fa-edit"></i> Éditer</a>
+                </td>
+            </tr>
+<?php
+    }
+}
+?>
+		</table>
+	</section>
+</section>

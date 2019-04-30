@@ -5,10 +5,7 @@
 	font-family: $title-font;
 	width: 100%;
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding-top: 5px;
-	padding-bottom: 15px;
+	flex-direction: column;
 
 	&--top
 	{
@@ -16,6 +13,169 @@
 		top: 0;
 		left: 0;
 	}
+
+	&__brand
+	{
+		padding-top: 1em;
+		padding-bottom: 1em;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+
+		&__logo
+		{
+			display: block;
+			font-size: 3em;
+			font-weight: 700;
+			letter-spacing: -3px;
+			transition: color 0.3s;
+	
+			&:hover
+			{
+				color: $main-color;
+			}
+		}
+
+		&__complement
+		{
+			display: block;
+			font-size: 1.2em;
+			font-weight: 500;
+			letter-spacing: -2px;
+			color: $secondary-light;
+			font-style: italic;
+		}
+	}
+
+	&__splitter
+	{
+		display: block;
+		width: 100%;
+		height: 0.15em;
+		background-color: $main-color;
+	}
+
+	&__menu
+	{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		background-color: $main-gray;
+
+		&__item
+		{
+			transition: background-color 0.3s;
+			padding-left: 1em;
+			padding-right: 1em;
+			padding-top: 0.75em;
+			padding-bottom: 0.75em;
+			font-size: 0.9em;
+			text-transform: uppercase;
+
+			&:hover
+			{
+				background-color: $main-color;
+				cursor: pointer;
+			}
+
+			&::before
+			{
+				font-family: "Font Awesome 5 Free";
+				font-weight: 700;
+				font-size: 2em;
+				margin-right: 0.2em;
+			}
+
+			// border-right: 0.1em $main-color solid;
+
+			// &:first-child
+			// {
+			// 	border-left: 0.1em $main-color solid;
+			// }
+		}
+
+		&__item--user-in
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f2f6";
+			}
+		}
+
+		&__item--user-out
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f2f5";
+			}
+		}
+
+		&__item--home
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f015";
+			}
+		}
+
+		&__item--blog
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f075";
+			}
+		}
+
+		&__item--event
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f133";
+			}
+		}
+
+		&__item--about
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f129";
+			}
+		}
+
+		&__item--user-account
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f007";
+			}
+		}
+
+		&__item--administration
+		{
+			@extend .nav__menu__item;
+
+			&::before
+			{
+				content: "\f508";
+			}
+		}
+	}
+
 
 	&__logo
 	{
@@ -31,7 +191,7 @@
 			color: $main-color;
 		}
 	}
-	
+
 	&__burger
 	{
 		display: inline-block;
