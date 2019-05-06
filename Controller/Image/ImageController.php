@@ -1,13 +1,13 @@
 <?php
 
-namespace Controller;
+namespace Controller\Image;
 
 use \Framework\View\View;
 use \Tools\Helper\UserHelper;
 use \Framework\Tools\Helper\RoutesHelper;
 use \Framework\Tools\Helper\PathHelper;
-use \BLL\Blog\ImageBLL;
-use \Model\Blog\Image;
+use \BLL\Image\ImageBLL;
+use \Model\Image\Image;
 use \Config\PathConfig;
 
 class ImageController

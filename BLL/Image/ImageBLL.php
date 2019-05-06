@@ -1,8 +1,8 @@
 <?php
 
-namespace BLL\Blog;
+namespace BLL\Image;
 
-use \DAL\Blog\ImageDAL;
+use \DAL\Image\ImageDAL;
 
 class ImageBLL
 {

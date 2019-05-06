@@ -43,22 +43,24 @@ foreach ($posts as $post)
 		<section class="home__container">
 			<!-- Section événements. -->
 			<section class="home__event">
-				<h1>Événements</h1>
+<?php for ($i = 0; $i < 8; $i++): ?>
+				<section class="thumbnail-event">
+				</section>
+<?php endfor; ?>
 			</section>
 
 			<!-- Section réseaux sociaux. -->
 			<section class="home__social">
 				<a class="home__social__button--facebook"><i class="fab fa-facebook-f"></i></a>
 				<a class="home__social__button--twitter"><i class="fab fa-twitter"></i></a>
-				<a class="home__social__button--youtube">Youtube</a>
-				<a class="home__social__button--instagram">Instagram</a>
+				<a class="home__social__button--youtube"><i class="fab fa-youtube"></i></a>
+				<a class="home__social__button--instagram"><i class="fab fa-instagram"></i></a>
 			</section>
 		</section>
 
 		<section class="home__container">
 			<!-- Section blog. -->
 			<section class="home__blog">
-				<h1>Actualités</h1>
 <?php
 $index = 0;
 foreach ($posts as $post) 
@@ -133,7 +135,11 @@ foreach ($posts as $post)
 
 			<!-- Section instagram. -->
 			<section class="home__instagram">
-				<h1>Instagram</h1>
+<?php for ($i = 0; $i < 5; $i++): ?>
+				<a href="https://picsum.photos/id/<?= $i * 100 + 1 ?>/400/150">
+					<img src="https://picsum.photos/id/<?= $i * 100 + 1 ?>/400/150">
+				</a>
+<?php endfor; ?>
 			</section>
 		</section>
 	</section>

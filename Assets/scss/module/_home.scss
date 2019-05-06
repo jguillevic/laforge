@@ -17,19 +17,16 @@
 
     &__event
     {
-        display: block;
         width: 78%;
-        background-color: purple;
-        overflow-wrap: break-word;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     &__social
     {
         width: 20%;
         display: grid;
-        grid-gap: 0.5em;
-        padding: 0.5em;
-        background-color: $secondary-light;
+        grid-gap: 3%;
         overflow-wrap: break-word;
         color: $main-light;
         text-align: center;
@@ -38,7 +35,7 @@
         {
             font-size: 3em;
             display: block;
-            height: 1.5em;
+            height: auto;
             width: 100%;
             transition: background-color 0.3s;
 
@@ -46,6 +43,11 @@
             {
                 background-color: $main-color;
                 cursor: pointer;
+            }
+
+            & i
+            {
+                padding-top: 0.8em;
             }
         }
 
@@ -69,32 +71,63 @@
 
         &__button--instagram
         {
+            @extend .home__social__button;
+
             grid-row: 2;
             grid-column: 1;
+            background-color: $instagram-color;
         }
 
         &__button--youtube
         {
+            @extend .home__social__button;
+
             grid-row: 2;
             grid-column: 2;
+            background-color: $youtube-color;
         }
     }
 
     &__instagram
     {
         width: 20%;
+        overflow: hidden;
         display: block;
-        background-color: aqua;
-        overflow-wrap: break-word;
+
+        & > a
+        {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5%;
+            background-color: $main-color;
+            overflow: hidden;
+
+            & > img
+            {
+                display: block;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                transition-property: opacity transform;
+                transition-duration: 0.3s;
+
+                &:hover
+                {
+                    opacity: 0.7;
+                    transform: scale(1.2);
+                }
+            }
+
+            &:last-child
+            {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &__blog
     {
-        display: block;
         width: 78%;
-        background-color: red;
-        overflow-wrap: break-word;
     }
-
-    
 }

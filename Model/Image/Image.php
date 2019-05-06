@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Blog;
+namespace Model\Image;
 
 use \Framework\Tools\Helper\PathHelper;
 

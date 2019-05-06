@@ -1,10 +1,10 @@
 <?php
 
-namespace DAL\Blog;
+namespace DAL\Image;
 
 use \Framework\DAL\Database;
 use \Framework\DAL\DALHelper;
-use \Model\Blog\Image;
+use \Model\Image\Image;
 
 class ImageDAL
 {

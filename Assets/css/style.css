@@ -769,29 +769,31 @@ option:not(:checked) {
     .home__container:first-child {
       margin-bottom: 2%; }
   .home__event {
-    display: block;
     width: 78%;
-    background-color: purple;
-    overflow-wrap: break-word; }
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
   .home__social {
     width: 20%;
     display: grid;
-    grid-gap: 0.5em;
-    padding: 0.5em;
-    background-color: #F0F0F0;
+    grid-gap: 3%;
     overflow-wrap: break-word;
     color: #FFFFFF;
     text-align: center; }
-    .home__social__button, .home__social__button--facebook, .home__social__button--twitter {
+    .home__social__button, .home__social__button--facebook, .home__social__button--twitter, .home__social__button--instagram, .home__social__button--youtube {
       font-size: 3em;
       display: block;
-      height: 1.5em;
+      height: auto;
       width: 100%;
       -webkit-transition: background-color 0.3s;
       transition: background-color 0.3s; }
-      .home__social__button:hover, .home__social__button--facebook:hover, .home__social__button--twitter:hover {
+      .home__social__button:hover, .home__social__button--facebook:hover, .home__social__button--twitter:hover, .home__social__button--instagram:hover, .home__social__button--youtube:hover {
         background-color: #FFA726;
         cursor: pointer; }
+      .home__social__button i, .home__social__button--facebook i, .home__social__button--twitter i, .home__social__button--instagram i, .home__social__button--youtube i {
+        padding-top: 0.8em; }
     .home__social__button--facebook {
       grid-row: 1;
       grid-column: 1;
@@ -802,20 +804,69 @@ option:not(:checked) {
       background-color: #00ACED; }
     .home__social__button--instagram {
       grid-row: 2;
-      grid-column: 1; }
+      grid-column: 1;
+      background-color: #DD2A7B; }
     .home__social__button--youtube {
       grid-row: 2;
-      grid-column: 2; }
+      grid-column: 2;
+      background-color: #E62117; }
   .home__instagram {
     width: 20%;
-    display: block;
-    background-color: aqua;
-    overflow-wrap: break-word; }
+    overflow: hidden;
+    display: block; }
+    .home__instagram > a {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 5%;
+      background-color: #FFA726;
+      overflow: hidden; }
+      .home__instagram > a > img {
+        display: block;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        -webkit-transition-property: opacity transform;
+        transition-property: opacity transform;
+        -webkit-transition-duration: 0.3s;
+                transition-duration: 0.3s; }
+        .home__instagram > a > img:hover {
+          opacity: 0.7;
+          -webkit-transform: scale(1.2);
+                  transform: scale(1.2); }
+      .home__instagram > a:last-child {
+        margin-bottom: 0; }
   .home__blog {
-    display: block;
-    width: 78%;
-    background-color: red;
-    overflow-wrap: break-word; }
+    width: 78%; }
+
+.thumbnail-event {
+  display: inline-block;
+  width: 24.5%;
+  background-color: #000000;
+  color: #FFFFFF;
+  margin: 0.25%; }
+  .thumbnail-event:first-child {
+    margin-left: 0;
+    margin-top: 0; }
+  .thumbnail-event:nth-child(2) {
+    margin-top: 0; }
+  .thumbnail-event:nth-child(3) {
+    margin-top: 0; }
+  .thumbnail-event:nth-child(4) {
+    margin-top: 0;
+    margin-right: 0; }
+  .thumbnail-event:nth-child(5) {
+    margin-left: 0;
+    margin-bottom: 0; }
+  .thumbnail-event:nth-child(6) {
+    margin-bottom: 0; }
+  .thumbnail-event:nth-child(7) {
+    margin-bottom: 0; }
+  .thumbnail-event:last-child {
+    margin-right: 0;
+    margin-bottom: 0; }
+  .thumbnail-event:hover {
+    background-color: #FFA726; }
 
 .thumbnail-post {
   width: 100%;

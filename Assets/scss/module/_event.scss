@@ -1,0 +1,57 @@
+.thumbnail-event
+{
+    display: inline-block;
+    width: 24.5%;
+    background-color: $main-dark;
+    color: $main-light;
+    margin: 0.25%;
+
+    &:first-child
+    {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    &:nth-child(2)
+    {
+        margin-top: 0;
+    }
+
+    &:nth-child(3)
+    {
+        margin-top: 0;
+    }
+
+    &:nth-child(4)
+    {
+        margin-top: 0;
+        margin-right: 0;
+    }
+
+    &:nth-child(5)
+    {
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+
+    &:nth-child(6)
+    {
+        margin-bottom: 0;
+    }
+
+    &:nth-child(7)
+    {
+        margin-bottom: 0;
+    }
+
+    &:last-child
+    {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+
+    &:hover
+    {
+        background-color: $main-color;
+    }
+}

@@ -5,10 +5,10 @@ namespace DAL\Blog;
 use \Framework\DAL\Database;
 use \Framework\DAL\DALHelper;
 use \DAL\Blog\CategoryDAL;
-use \DAL\Blog\ImageDAL;
+use \DAL\Image\ImageDAL;
 use \Model\Blog\Post;
 use \Model\Blog\Category;
-use \Model\Blog\Image;
+use \Model\Image\Image;
 
 class PostDAL
 {

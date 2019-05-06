@@ -31,19 +31,19 @@
 	}
 	, {
 		"Path":"/image/manage"
-		, "Controller":"ImageController"
+		, "Controller":"Image\\ImageController"
 		, "Action":"Manage"
 		, "Name":"ManageImage"
 	}
 	, {
 		"Path":"/image/add"
-		, "Controller":"ImageController"
+		, "Controller":"Image\\ImageController"
 		, "Action":"Add"
 		, "Name":"AddImage"
 	}
 	, {
 		"Path":"/image/update"
-		, "Controller":"ImageController"
+		, "Controller":"Image\\ImageController"
 		, "Action":"Update"
 		, "Name":"UpdateImage"
 	}

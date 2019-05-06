@@ -3,7 +3,7 @@
 namespace Model\Blog;
 
 use \Model\Blog\Category;
-use \Model\Blog\Image;
+use \Model\Image\Image;
 
 class Post
 {
