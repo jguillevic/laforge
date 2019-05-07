@@ -16,37 +16,36 @@ $schedule = $store->GetSchedule();
 ?>
 
 <section class="l-content content">
-<article>
-		<header>
-			<h2>Contact</h2>
-		</header>
-		<section>
-			<section>
-				<h3><span><i class="far fa-calendar-alt"></i></span> Nos horaires</h3>
-				<table>
+	<section class="about__tiles-content">
+		<section class="about__tile--schedule">
+			<h1 class="about__tile__title--schedule">Nos horaires</h1>
+			<section class="about__tile__content">
+			<table>
 <?php foreach ($schedule->GetDaySchedules() as $daySchedule) : ?>
-					<tr>
-						<td><?= $daySchedule->GetDay()->GetLabel();?></td>
-						<td>:</td>
-						<td>
+				<tr>
+					<td><?= $daySchedule->GetDay()->GetLabel();?></td>
+					<td>:</td>
+					<td>
 	<?php if ($daySchedule->IsOpen()): ?>
 		<?php $i=0; ?>
 		<?php foreach ($daySchedule->GetSections() as $section): ?>
-							<?= $i > 0 ? '/' : '' ?> 
-							<?= $section->GetStartingTime()->format('H:i') ?>-<?= $section->GetEndingTime()->format('H:i') ?>
+						<?= $i > 0 ? '/' : '' ?> 
+						<?= $section->GetStartingTime()->format('H:i') ?>-<?= $section->GetEndingTime()->format('H:i') ?>
 			<?php $i++; ?>
 		<?php endforeach; ?>
 	<?php else: ?>
-							Fermé
+						<i class="fas fa-times"></i>
 	<?php endif; ?>
-						</td>
-					</tr>
+					</td>
+				</tr>
 <?php endforeach; ?>
-				</table>
+			</table>
 			</section>
+		</section>
 
-			<section>
-				<h3><span><i class="fas fa-envelope"></i></span> Nous contacter</h3>
+		<section class="about__tile--contact">
+			<h1 class="about__tile__title--contact">Nous contacter</h1>
+			<section class="about__tile__content">
 				<span><i class="fas fa-at"></i></span>
 				<p><a href="mailto:<?= $contact->GetEmail(); ?>"><?= $contact->GetEmail(); ?></a></p>
 				<span><i class="fab fa-facebook-messenger"></i></span>
@@ -54,9 +53,11 @@ $schedule = $store->GetSchedule();
 				<span><i class="fas fa-phone"></i></span>
 				<p><a href="tel:<?= $contact->GetPhoneNumber(); ?>"><?= $contact->GetPhoneNumber(); ?></a></p>
 			</section>
+		</section>
 
-			<section>
-				<h3><span><i class="fas fa-map-marker-alt"></i></span> Nous trouver</h3>
+		<section class="about__tile--find">
+			<h1 class="about__tile__title--find">Nous trouver</h1>
+			<section class="about__tile__content">
 				<address>
 					<p><?= $address->GetSocialReason(); ?></p>
 					<p><?= $address->GetLine1(); ?></p>
@@ -69,14 +70,16 @@ $schedule = $store->GetSchedule();
 					<p><?= $address->GetPostalCode(); ?> <?= $address->GetCity(); ?></p>
 				</address>
 			</section>
+		</section>
 			
-			<section>
-				<h3><span><i class="fas fa-share-alt"></i></span> Nous suivre</h3>
-				<a href="https://www.facebook.com/La-Forge-dAudren-164158920348705"><i class="fab fa-facebook"></i></a>
-				<a href="https://twitter.com/LaForgedAudren"><i class="fab fa-twitter"></i></a>
-				<a href="https://www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ"><i class="fab fa-youtube"></i></a>
-				<a href="https://www.instagram.com/renaudlepage/"><i class="fab fa-instagram"></i></a>
+		<section class="about__tile--follow">
+			<h1 class="about__tile__title--follow">Nous suivre</h1>
+			<section class="about__tile__content">
+				<a class="button--facebook" href="https://www.facebook.com/La-Forge-dAudren-164158920348705"></a>
+				<a class="button--twitter" href="https://twitter.com/LaForgedAudren"></a>
+				<a class="button--youtube" href="https://www.youtube.com/channel/UCuSOG6fpU1ymvx3yzbBrlUQ"></a>
+				<a class="button--instagram" href="https://www.instagram.com/renaudlepage/"></a>
 			</section>
 		</section>
-	</article>
+	</section>
 </section>

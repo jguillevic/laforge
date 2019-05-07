@@ -1,0 +1,147 @@
+.about
+{
+    &__tiles-content
+    {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 49% 1em 49%;
+        grid-template-rows: repeat(50, 1em);
+        padding-top: 3em;
+        padding-bottom: 3em;
+    }
+
+    &__tile
+    {
+        box-shadow: $shadow;
+        height: 100%;
+        border-radius: 1em;
+        overflow: hidden;
+
+        &__title
+        {
+            background-color: $main-color;
+            color: $main-light;
+            padding-left: 1em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            margin: 0;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            font-weight: 500;
+
+            &::before
+            {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 700;
+                font-size: 1em;
+                display: inline-block;
+                margin-right: 0.7em;
+            }
+        }
+
+        &__title--schedule
+        {
+            @extend .about__tile__title;
+
+            &::before
+            {
+                content: "\f133";
+            }
+        }
+
+        &__title--contact
+        {
+            @extend .about__tile__title;
+
+            &::before
+            {
+                content: "\f0e0";
+            }
+        }
+
+        &__title--find
+        {
+            @extend .about__tile__title;
+
+            &::before
+            {
+                content: "\f3c5";
+            }
+        }
+
+        &__title--follow
+        {
+            @extend .about__tile__title;
+
+            &::before
+            {
+                content: "\f1e0";
+            }
+        }
+
+        &__content
+        {
+            font-size: 1em;
+            padding-left: 2em;
+            padding-right: 2em;
+            padding-top: 2em;
+            padding-bottom: 2em;
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__button
+        {
+            color: $main-light;
+            background-color: $main-dark;
+            transition: background-color 0.3s;
+
+            &:hover
+            {
+                cursor: pointer;
+                background-color: $main-color;
+
+            }
+        }
+    }
+
+    &__tile--schedule
+    {
+        @extend .about__tile;
+
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: 20;
+    }
+
+    &__tile--contact
+    {
+        @extend .about__tile;
+
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 21;
+        grid-row-end: 35;
+    }
+
+    &__tile--find
+    {
+        @extend .about__tile;
+
+        grid-column-start: 3;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 50;
+    }
+
+    &__tile--follow
+    {
+        @extend .about__tile;
+
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 36;
+        grid-row-end: 50;
+    }
+}

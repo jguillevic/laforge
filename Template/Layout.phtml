@@ -12,34 +12,28 @@ use \Tools\Helper\UserHelper;
 	<script type="text/javascript" src="../Assets/js/jquery/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="../Assets/js/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<script src="../Assets/js/module/nav.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700" rel="stylesheet">
 </head>
 <body>
 	<header class="l-header header">
 		<nav class="nav">
-				<!-- <a class="nav__logo" href="<?= RoutesHelper::Path("DisplayHome"); ?>">La Forge d'Audren</a>
-				<span class="nav__burger">
-				<i class="fas fa-bars"></i>
-				</span> -->
 			<section class="nav__brand">
 				<a class="nav__brand__logo" href="<?= RoutesHelper::Path("DisplayHome"); ?>">La Forge d'Audren</a>
 				<span class="nav__brand__complement">Wargames, Jeux de société, Jeux de cartes & Jeux de rôles</span>
 			</section>
-			<section class="nav__splitter"></section>
 			<section class="nav__menu">
 				<a href="<?= RoutesHelper::Path("DisplayHome"); ?>" class="nav__menu__item--home">Accueil</a>
 				<a href="<?= RoutesHelper::Path("DisplayHome"); ?>" class="nav__menu__item--blog">Actualités</a>
 				<a href="<?= RoutesHelper::Path("DisplayHome"); ?>" class="nav__menu__item--event">Événements</a>
 				<a href="<?= RoutesHelper::Path("DisplayAbout"); ?>" class="nav__menu__item--about">A propos</a>
-<?php if (UserHelper::IsLogin()): ?>
-				<a href="<?= RoutesHelper::Path("DisplayHome"); ?>" class="nav__menu__item--user-account">Mon compte</a>
+<!-- <?php if (UserHelper::IsLogin()): ?>
 				<a href="<?= RoutesHelper::Path("DisplayHome"); ?>" class="nav__menu__item--administration">Administration</a>
-<?php endif; ?>
+<?php endif; ?> -->
 <?php if (!UserHelper::IsLogin()): ?>
-				<a href="<?= RoutesHelper::Path("LoginUser"); ?>" class="nav__menu__item--user-in">Connexion</a>
+				<a href="<?= RoutesHelper::Path("LoginUser"); ?>" class="nav__menu__item--user-account">Mon compte</a>
 <?php else: ?>
-				<a href="<?= RoutesHelper::Path("LogoutUser"); ?>" class="nav__menu__item--user-out">Déconnexion</a>
+				<a href="<?= RoutesHelper::Path("LogoutUser"); ?>" class="nav__menu__item--user-account">Mon compte</a>
 <?php endif; ?>
 			</section>
 		</nav>

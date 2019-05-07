@@ -6,13 +6,20 @@
 	color: $main-light;
 	background-color: $main-color;
 	padding: 0.7em;
-	transition: background 0.3s, color 0.3s;
+	transition: background-color 0.3s, color 0.3s;
 	text-transform: uppercase;
 
 	&:hover
 	{
 		cursor: pointer;
 		background-color: $secondary-color;
+	}
+
+	&::before
+	{
+		font-family: "Font Awesome 5 Free"; 
+		font-weight: 900;
+		margin-right: 0.6em;
 	}
 }
 
@@ -33,10 +40,7 @@
 
 	&::before
 	{
-		font-family: "Font Awesome 5 Free"; 
-		font-weight: 700;
-		content: "\f0e2";
-		margin-right: 0.6em;
+		content: "\f0e2";	
 	}
 }
 
@@ -46,10 +50,7 @@
 
 	&::before
 	{
-		font-family: "Font Awesome 5 Free"; 
-		font-weight: 700;
 		content: "\f0c7";
-		margin-right: 0.6em;
 	}
 }
 
@@ -59,10 +60,7 @@
 
 	&::before
 	{
-		font-family: "Font Awesome 5 Free"; 
-		font-weight: 700;
 		content: "\f067";
-		margin-right: 0.6em;
 	}
 }
 
@@ -72,10 +70,7 @@
 
 	&::before
 	{
-		font-family: "Font Awesome 5 Free"; 
-		font-weight: 700;
 		content: "\f044";
-		margin-right: 0.6em;
 	}
 }
 
@@ -85,10 +80,7 @@
 
 	&::before
 	{
-		font-family: "Font Awesome 5 Free"; 
-		font-weight: 700;
 		content: "\f1f8";
-		margin-right: 0.6em;
 	}
 }
 
@@ -96,49 +88,94 @@
 {
 	font-size: 1.5em;
 	width: 100%;
-  	height: 2em;
+  	height: 4em;
   	color: $main-light;
   	position: relative;
-  	transition: background 0.3s, color 0.3s;
-  	transition: opacity 0.5s;
+	transition: background-color 0.3s;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+	border-radius: 0.8em;
 
-	& i
+	&::before
 	{
+		font-family: "Font Awesome 5 Brands";
+		font-weight: 400;
+		font-size: 2em;
 		position: absolute;
+		display: block;
     	top: 50%;
     	left: 50%;
-    	transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 	}
 
 	&:hover
 	{
 		cursor: pointer;
-		opacity: 0.6;
+		background-color: $main-color;
 	}
 }
 
 .button--facebook
 {
-	background-color: $facebook-color;
 	@extend .button--social;
+
+	background-color: $facebook-color;
+
+	&::before
+	{
+		content: "\f39e";
+	}
 }
 
 .button--twitter
 {
-	background-color: $twitter-color;
 	@extend .button--social;
+
+	background-color: $twitter-color;
+
+	&::before
+	{
+		content: "\f099";
+	}
+}
+
+.button--youtube
+{
+	@extend .button--social;
+
+	background-color: $youtube-color;
+
+	&::before
+	{
+		content: "\f167";
+	}
+}
+
+.button--instagram
+{
+	@extend .button--social;
+
+	background-color: $instagram-color;
+
+	&::before
+	{
+		content: "\f16d";
+	}
 }
 
 .button--linkedin
 {
-	background-color: $linkedin-color;
+	
 	@extend .button--social;
+
+	background-color: $linkedin-color;
 }
 
 .button--mail
 {
-	background-color: $googleplus-color;
 	@extend .button--social;
+
+	background-color: $googleplus-color;
 }
 
 .button--submit
